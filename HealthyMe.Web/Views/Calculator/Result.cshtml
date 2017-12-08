@@ -1,0 +1,58 @@
+﻿@model CalculatorResultViewModel
+@{
+    ViewData["Title"] = "Result";
+}
+@{
+    string condition = "";
+    if (Model.Result < 15)
+    {
+        condition = "Very Severly Underweight";
+    }
+    else if (Model.Result > 15 && Model.Result <= 16)
+    {
+        condition = "Severly Underweight";
+    }
+    else if (Model.Result > 16 && Model.Result <= 18.5)
+    {
+        condition = "Underweight";
+    }
+    else if (Model.Result > 18.5 && Model.Result <= 25)
+    {
+        condition = "Normal (Healthy Weight).";
+    }
+    else if (Model.Result > 25 && Model.Result <= 30)
+    {
+        condition = "Overweight";
+    }
+    else if (Model.Result > 30 && Model.Result <= 35)
+    {
+        condition = "Obese Class I (Moderately obese).";
+    }
+    else if (Model.Result > 35 && Model.Result < 40)
+    {
+        condition = "Obese Class II (Severely obese).";
+    }
+    else if (Model.Result > 40)
+    {
+        condition = "Obese Class III (Very severely obese)";
+    }
+}
+<div>
+    <a class="button btn-warning headerText" href="/calculator/chart">See the Chart</a>
+</div>
+<div class="container">
+    <h2 class="headerText">Results</h2>
+
+    <div class="alert alert-success alert-dismissable fade in ">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong class="headerText">@Model.Message</strong>
+    </div>
+    <div class="alert alert-warning alert-dismissable fade in ">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong class="headerText">Your result indicates that you are @condition</strong>
+    </div>
+    <div class="alert alert-info alert-dismissable fade in">
+        <a href="/calculator/chart" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong class="headerText">Close me to go to the chart.</strong>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@model HealthyMe.Services.Models.DietFormModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Diet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label"></label>
+                <input type="file" name="file" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+                <dl >
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Image)
+                    </dt>
+                    <dd>
+                        <img src="data:image;base64,@System.Convert.ToBase64String(Model.Image)" class="imageResize" style="max-width:250px;max-height:300px; position:center" />
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="All">Back to List</a>
+</div>

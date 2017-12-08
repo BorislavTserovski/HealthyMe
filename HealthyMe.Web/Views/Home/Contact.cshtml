@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Contact us";
+    ViewData["Message"] = "We are always here for you!";
+}
+<br />
+<h2 class="headerText">@ViewData["Title"]</h2>
+<h3 class="headerText">@ViewData["Message"]</h3>
+<h1 class="headerText">Where we are?</h1>
+
+<div class="row">
+
+
+    <div class="col-md-4" id="map" style="width:400px;height:400px;background:yellow"></div>
+
+    <script>
+        function myMap() {
+            var mapOptions = {
+                center: new google.maps.LatLng(42.698937, 23.30805),
+                zoom: 40,
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            }
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQLQ2ao6VmYji2Xd41aTF3_l2IzqkpYmI&callback=myMap">
+    </script>
+
+
+    <address class="col-md-4">
+        One Microsoft Way<br />
+        Redmond, WA 98052-6399<br />
+        <abbr title="Phone">P:</abbr>
+        425.555.0100
+    </address>
+
+    <address class="col-md-4">
+        <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    </address>
+</div>

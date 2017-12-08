@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Chart";
+}
+<div class="container">
+    <h2 class="headerText">Body Mass Index Chart</h2>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th class="headerText" style="text-align:center">Weight Categories</th>
+                <th class="headerText" style="text-align:center">BMI</th>
+                <th class="headerText" style="text-align:center">Recommendation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="tableText danger">
+                <td>Very Severly Underweight</td>
+                <td>< 15</td>
+                <td><a class="btn btn-info" href="/calculator/recommendation">Click</a></td>
+            </tr>
+            <tr class="tableText warning">
+                <td>Severly Underweight</td>
+                <td>15-16.0</td>
+                <td><a class="btn btn-info" href="/calculator/recommendation">Click</a></td>
+            </tr>
+            <tr class="tableText info">
+                <td>Underweight</td>
+                <td class="tableText">16.1-18.4</td>
+                <td><a class="btn btn-info" href="/calculator/recommendation">Click</a></td>
+            </tr>
+            <tr class="success tableText">
+                <td>Normal</td>
+                <td>18.5=25.0</td>
+                <td><a class="btn btn-info" href="/calculator/recommendation">Click</a></td>
+            </tr>
+            <tr class="tableText info">
+                <td>Overweight</td>
+                <td>25.1-30.0</td>
+                <td><a class="btn btn-info" href="/calculator/recommendation">Click</a></td>
+            </tr>
+            <tr class="active tableText">
+                <td>Obese Class I (Moderately obese).</td>
+                <td>30.1-35.0</td>
+                <td><a class="btn btn-info" href="/calculator/recommendation">Click</a></td>
+            </tr>
+            <tr class="warning tableText">
+                <td>Obese Class II (Severely obese)</td>
+                <td>35.1-40.0</td>
+                <td><a class="btn btn-info" href="/calculator/recommendation">Click</a></td>
+            </tr>
+            <tr class="danger tableText">
+                <td>Obese Class III (Very severely obese)</td>
+                <td> > 40</td>
+                <td><a class="btn btn-info" href="/calculator/recommendation">Click</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

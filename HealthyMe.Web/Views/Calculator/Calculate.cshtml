@@ -1,0 +1,45 @@
+﻿
+@model CalculatorModel
+@{
+    ViewData["Title"] = "BMICalculator";
+}
+<h2 class="headerText">Body Mass Index Calculator</h2>
+
+
+
+<form method="post">
+    <div class="form-control">
+        <label asp-for="Gender"></label>
+        <select asp-for="Gender" style="color:black">
+            <option value="1">male</option>
+            <option value="2">female</option>
+        </select>
+        <span asp-validation-for="Weight" class="form-text text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Weight"></label>
+        <input asp-for="Weight" class="form-control" type="number" value="60" required />
+        <span asp-validation-for="Weight" class="form-text text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Height"></label>
+        <input asp-for="Height" type="number" value="160" class="form-control" required />
+        <span asp-validation-for="Height" class="form-text text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Age"></label>
+        <input asp-for="Age" class="form-control" value="20" required />
+        <span asp-validation-for="Age" class="form-text text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="button btn-success"><span class="headerText">Calculate </span></button>
+    </div>
+
+
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
