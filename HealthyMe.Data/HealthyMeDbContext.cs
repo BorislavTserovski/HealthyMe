@@ -40,10 +40,6 @@ namespace HealthyMe.Data
                 .WithMany(d => d.Products)
                 .HasForeignKey(dp => dp.DietId);
 
-            builder.Entity<Product>()
-                  .HasOne(p => p.Category)
-                  .WithMany(c => c.Products)
-                  .HasForeignKey(p => p.CategoryId);
 
             builder.Entity<Article>()
                 .HasOne(a => a.Author)

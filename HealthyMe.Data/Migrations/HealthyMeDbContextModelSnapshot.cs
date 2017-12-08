@@ -42,20 +42,6 @@ namespace HealthyMe.Data.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("HealthyMe.Data.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
             modelBuilder.Entity("HealthyMe.Data.Models.Diet", b =>
                 {
                     b.Property<int>("Id")
@@ -101,6 +87,8 @@ namespace HealthyMe.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("Category");
+
                     b.Property<int>("CategoryId");
 
                     b.Property<int>("Energy");
@@ -108,8 +96,6 @@ namespace HealthyMe.Data.Migrations
                     b.Property<double>("Fat");
 
                     b.Property<byte[]>("Image");
-
-                    b.Property<int>("Measure");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -120,8 +106,6 @@ namespace HealthyMe.Data.Migrations
                     b.Property<double>("Sugars");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -338,14 +322,6 @@ namespace HealthyMe.Data.Migrations
                     b.HasOne("HealthyMe.Data.Models.Product", "Product")
                         .WithMany("Diets")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("HealthyMe.Data.Models.Product", b =>
-                {
-                    b.HasOne("HealthyMe.Data.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

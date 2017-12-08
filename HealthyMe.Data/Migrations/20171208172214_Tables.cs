@@ -53,16 +53,23 @@ namespace HealthyMe.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 30, nullable: false)
+                    Category = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false),
+                    Energy = table.Column<int>(nullable: false),
+                    Fat = table.Column<double>(nullable: false),
+                    Image = table.Column<byte[]>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Protein = table.Column<double>(nullable: false),
+                    Sugars = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -232,32 +239,6 @@ namespace HealthyMe.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CategoryId = table.Column<int>(nullable: false),
-                    Energy = table.Column<int>(nullable: false),
-                    Fat = table.Column<double>(nullable: false),
-                    Image = table.Column<byte[]>(nullable: true),
-                    Measure = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Protein = table.Column<double>(nullable: false),
-                    Sugars = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Category_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DietWithProducts",
                 columns: table => new
                 {
@@ -334,11 +315,6 @@ namespace HealthyMe.Data.Migrations
                 name: "IX_DietWithProducts_ProductId",
                 table: "DietWithProducts",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
-                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -378,9 +354,6 @@ namespace HealthyMe.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Category");
         }
     }
 }

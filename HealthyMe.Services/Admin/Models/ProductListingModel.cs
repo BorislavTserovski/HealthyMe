@@ -1,23 +1,19 @@
-﻿using System;
+﻿using HealthyMe.Common.Mapping;
+using HealthyMe.Data.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
+using AutoMapper;
 
-namespace HealthyMe.Data.Models
+namespace HealthyMe.Services.Admin.Models
 {
-    public class Product
+    public class ProductListingModel : IMapFrom <Product> 
     {
         public int Id { get; set; }
 
-        [Required]
-        [MinLength(2)]
-        [MaxLength(50)]
         public string Name { get; set; }
 
-        public int CategoryId { get; set; }
-
         public Category Category { get; set; }
-
 
         public int Energy { get; set; }
 
@@ -29,6 +25,7 @@ namespace HealthyMe.Data.Models
 
         public byte[] Image { get; set; }
 
-        public List<DietProduct> Diets { get; set; } = new List<DietProduct>();
+  
+        
     }
 }

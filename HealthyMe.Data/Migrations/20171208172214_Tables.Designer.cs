@@ -12,7 +12,7 @@ using System;
 namespace HealthyMe.Data.Migrations
 {
     [DbContext(typeof(HealthyMeDbContext))]
-    [Migration("20171205151330_Tables")]
+    [Migration("20171208172214_Tables")]
     partial class Tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,20 +41,6 @@ namespace HealthyMe.Data.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Articles");
-                });
-
-            modelBuilder.Entity("HealthyMe.Data.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("HealthyMe.Data.Models.Diet", b =>
@@ -102,6 +88,8 @@ namespace HealthyMe.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("Category");
+
                     b.Property<int>("CategoryId");
 
                     b.Property<int>("Energy");
@@ -109,8 +97,6 @@ namespace HealthyMe.Data.Migrations
                     b.Property<double>("Fat");
 
                     b.Property<byte[]>("Image");
-
-                    b.Property<int>("Measure");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -121,8 +107,6 @@ namespace HealthyMe.Data.Migrations
                     b.Property<double>("Sugars");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
@@ -339,14 +323,6 @@ namespace HealthyMe.Data.Migrations
                     b.HasOne("HealthyMe.Data.Models.Product", "Product")
                         .WithMany("Diets")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("HealthyMe.Data.Models.Product", b =>
-                {
-                    b.HasOne("HealthyMe.Data.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -26,7 +26,7 @@ namespace HealthyMe.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+       
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<HealthyMeDbContext>(options =>
@@ -42,7 +42,7 @@ namespace HealthyMe.Web
              .AddEntityFrameworkStores<HealthyMeDbContext>()
              .AddDefaultTokenProviders();
 
-            // Add application services.
+            
 
             services.AddAutoMapper();
 
@@ -54,10 +54,10 @@ namespace HealthyMe.Web
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+       
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-           // app.UseDataBaseMigration();
+             app.UseDataBaseMigration();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

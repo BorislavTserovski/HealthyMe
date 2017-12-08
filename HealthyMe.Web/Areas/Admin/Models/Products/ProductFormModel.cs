@@ -1,14 +1,14 @@
-﻿using System;
+﻿using HealthyMe.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace HealthyMe.Data.Models
+namespace HealthyMe.Web.Areas.Admin.Models.Products
 {
-    public class Product
+    public class ProductFormModel
     {
-        public int Id { get; set; }
-
         [Required]
         [MinLength(2)]
         [MaxLength(50)]
@@ -17,7 +17,6 @@ namespace HealthyMe.Data.Models
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }
-
 
         public int Energy { get; set; }
 
@@ -28,7 +27,5 @@ namespace HealthyMe.Data.Models
         public double Sugars { get; set; }
 
         public byte[] Image { get; set; }
-
-        public List<DietProduct> Diets { get; set; } = new List<DietProduct>();
     }
 }

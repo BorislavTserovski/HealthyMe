@@ -7,13 +7,12 @@ using HealthyMe.Data;
 using HealthyMe.Data.Models;
 using System.IO;
 using System.Linq;
+using AutoMapper.QueryableExtensions;
 
 namespace HealthyMe.Services.Implementations
 {
     public class DietService : IDietService
     {
-
-
         private HealthyMeDbContext db;
 
         public DietService(HealthyMeDbContext db)
@@ -48,16 +47,9 @@ namespace HealthyMe.Services.Implementations
 
         public DietFormModel GetById(int id)
         {
-            Diet diet = this.db.Diets.Find(id);
-
-            DietFormModel model = new DietFormModel()
-            {
-                Id = diet.Id,
-                Name = diet.Name,
-                Description = diet.Description,
-                Image = diet.Image
-            };
-            return model;
+            return this.db.Diets.Where(d => d.Id == id)
+                 .ProjectTo<DietFormModel>()
+                 .FirstOrDefault();
             
         }
 
@@ -66,13 +58,8 @@ namespace HealthyMe.Services.Implementations
             return this.db.Diets.OrderByDescending(d => d.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .Select(d => new DietListingModel
-                {
-                    Id = d.Id,
-                    Name = d.Name,
-                    Description = d.Description,
-                    Image = d.Image
-                }).ToList();
+                .ProjectTo<DietListingModel>()
+                .ToList();
         }
 
         public void Delete(int id)
