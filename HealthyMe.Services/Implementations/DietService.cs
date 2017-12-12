@@ -65,6 +65,11 @@ namespace HealthyMe.Services.Implementations
         public void Delete(int id)
         {
             Diet diet = this.db.Diets.Find(id);
+
+            if (diet==null)
+            {
+                return;
+            }
             this.db.Remove(diet);
             this.db.SaveChanges();
         }

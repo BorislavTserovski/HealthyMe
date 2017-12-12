@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using HealthyMe.Data.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Linq;
+using HealthyMe.Web.Areas.Admin.Models.Products;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthyMe.Services.Admin.Implementations
 {
@@ -21,6 +24,18 @@ namespace HealthyMe.Services.Admin.Implementations
             this.db = db;
         }
 
+        public async Task AddToDay(int id, string userId)
+        {
+            Product product = this.db.Products.Where(p => p.Id == id).FirstOrDefault();
+            User user = this.db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            user.AllowedCalories -= product.Energy;
+
+            await this.db.SaveChangesAsync();
+
+
+        }
+
+        [AllowAnonymous]
         public async Task<IEnumerable<ProductListingModel>> AllAsync()
         => await this.db.Products
             .ProjectTo<ProductListingModel>()
@@ -50,6 +65,62 @@ namespace HealthyMe.Services.Admin.Implementations
 
             this.db.Add(product);
             await this.db.SaveChangesAsync();
+        }
+
+        public async Task Delete(int id)
+        {
+            var product = this.db.Products.Where(p => p.Id == id).FirstOrDefault();
+
+            if (product == null)
+            {
+                return;
+            }
+
+            this.db.Products.Remove(product);
+
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task<ProductViewModel> GetById(int id)
+        => await
+            this.db.Products
+                .Where(p => p.Id == id)
+                .ProjectTo<ProductViewModel>()
+                .FirstOrDefaultAsync();
+
+        public async Task<IEnumerable<ProductListingModel>> Search(string searchBy, string searchTerm)
+        {
+            if (searchBy == "Name")
+            {
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    return new List<ProductListingModel>();
+                }
+                var result = await this.db.Products
+                    .Where(p => p.Name.ToLower()
+                    .Contains(searchTerm.ToLower()))
+                    .ProjectTo<ProductListingModel>()
+                    .ToListAsync();
+
+                return result;
+            }
+
+            else if (searchBy == "Category")
+            {
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    return new List<ProductListingModel>();
+                }
+                var result = await this.db.Products
+                    .Where(p => p.Category.ToString().ToLower()
+                    .Contains(searchTerm.ToLower()))
+                    .ProjectTo<ProductListingModel>()
+                    .ToListAsync();
+
+                return result;
+            }
+
+            return null;
         }
     }
 }

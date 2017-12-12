@@ -51,7 +51,9 @@ namespace HealthyMe.Web
             services.AddMvc(options =>
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+                
             });
+            
         }
 
        

@@ -1,18 +1,80 @@
-﻿@{
+﻿@model IEnumerable<ProductListingModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 
+
 <div class="row">
+    <div class="col-md-6">
+        <p>
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+            {
+                <b>Search by: </b>@Html.RadioButton("SearchBy", "Name", true)<text> Name</text>
+
+
+                @Html.RadioButton("SearchBy", "Category") <text>Category</text><br />
+                @Html.TextBox("searchTerm", null, new { @class = "inputTextColor" })
+                <input type="submit" class="btn btn-primary" value="Search" />
+            }
+        </p>
+    </div>
     <div class="col-md-6">
         <ul>
 
             <li><a class="btn btn-default" href="/diets/all">Diets</a>  </li>
-            <li><a class="btn btn-warning"  href="/calculator/calculate">BMICalculator</a></li>
+            <li><a class="btn btn-warning" href="/calculator/calculate">BMICalculator</a></li>
+            <li><a class="btn btn-warning" href="/products">Products</a></li>
 
         </ul>
     </div>
-   
-   
-</div>
+    @if (Model.Any())
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Picture
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+
+                        <td>
+                            @if (item.Image != null)
+                            {
+                              <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" class="imageResize" style="max-width:250px;max-height:300px;" />
+                            }
+                        </td>
+
+                        <td>
+
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    
+
+
+
+
+
+    </div>
 

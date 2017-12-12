@@ -5,14 +5,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HealthyMe.Web.Models;
+using HealthyMe.Services.Admin;
+using HealthyMe.Web.Areas.Admin.Models.Products;
+using HealthyMe.Services.Admin.Models;
 
 namespace HealthyMe.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IProductService products;
+
+        public HomeController(IProductService products)
         {
-            return View();
+            this.products = products;
+        }
+
+        public async Task<IActionResult> Index(string searchBy, string searchTerm)
+        {
+            var result = await this.products.Search(searchBy, searchTerm);
+            if ((searchBy == null && searchTerm == null))
+            {
+                return View(new List<ProductListingModel>());
+            }
+            
+            else
+            {
+                return View(result);
+            }
+            
+           
         }
 
         public IActionResult About()

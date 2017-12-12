@@ -14,9 +14,9 @@ namespace HealthyMe.Web.Controllers
 {
     public class DietsController : Controller
     {
-        private const int PageSize = 6;
+        private const int PageSize = 5;
         private readonly UserManager<User> userManager;
-        private IDietService diets;
+        private readonly IDietService diets;
 
         public DietsController(IDietService diets, UserManager<User> userManager)
         {

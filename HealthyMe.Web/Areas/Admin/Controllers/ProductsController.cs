@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using HealthyMe.Data;
-using HealthyMe.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using HealthyMe.Services.Admin;
 using HealthyMe.Web.Areas.Admin.Models.Products;
@@ -25,25 +18,12 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
             this.products = products;
         }
 
-
+        
         public async Task<IActionResult> Index()
         {
             var products = await this.products.AllAsync();
             return View(products);
         }
-
-
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-
-
-        //    return View();
-        //}
 
 
         public IActionResult Create()
@@ -66,85 +46,28 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //// GET: Admin/Products/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var product = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Name", product.CategoryId);
-        //    return View(product);
-        //}
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CategoryId,Measure,Energy,Fat,Protein,Sugars,Image")] Product product)
-        //{
-        //    if (id != product.Id)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(product);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!ProductExists(product.Id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Name", product.CategoryId);
-        //    return View(product);
-        //}
-
-        //// GET: Admin/Products/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var product = await _context.Products
-        //        .Include(p => p.Category)
-        //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(product);
-        //}
+        public async Task<IActionResult> Delete(int id)
+        {
+           
+            var product = await this.products.GetById(id);
+            if (product==null)
+            {
+                return NotFound();
+            }
+            
+            return View(product);
+        }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var product = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);
-        //    _context.Products.Remove(product);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Destroy(int id)
+        {
+            await this.products.Delete(id);
+
+            return RedirectToAction(nameof(Index));
+        }
 
 
     }
