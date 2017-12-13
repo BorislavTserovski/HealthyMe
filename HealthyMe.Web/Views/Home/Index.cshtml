@@ -15,20 +15,12 @@
 
 
                 @Html.RadioButton("SearchBy", "Category") <text>Category</text><br />
-                @Html.TextBox("searchTerm", null, new { @class = "inputTextColor" })
+                @Html.TextBox("searchTerm", null, new { @class = "searchField" })
                 <input type="submit" class="btn btn-primary" value="Search" />
             }
         </p>
     </div>
-    <div class="col-md-6">
-        <ul>
-
-            <li><a class="btn btn-default" href="/diets/all">Diets</a>  </li>
-            <li><a class="btn btn-warning" href="/calculator/calculate">BMICalculator</a></li>
-            <li><a class="btn btn-warning" href="/products">Products</a></li>
-
-        </ul>
-    </div>
+   
     @if (Model.Any())
     {
         <table class="table table-bordered">

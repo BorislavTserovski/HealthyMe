@@ -2,9 +2,9 @@
     @{
         ViewData["Title"] = "Index";
     }
-    <h2>Index</h2>
+    <h2 class="headerText">Products</h2>
     
-    <table class="table">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>
@@ -64,7 +64,7 @@
                     </td>
                     <td>
                        
-                        <a asp-action="AddToDay" asp-route-id="@item.Id">Add</a>
+                        <a asp-action="AddToDay" asp-route-id="@item.Id" class="btn btn-primary">Add</a>
                        
                     </td>
                 </tr>

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HealthyMe.Data.Migrations
 {
-    public partial class Tables : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,6 +33,7 @@ namespace HealthyMe.Data.Migrations
                     Birthdate = table.Column<DateTime>(nullable: false),
                     BodyMassIndex = table.Column<double>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Day = table.Column<DateTime>(nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
@@ -239,6 +240,30 @@ namespace HealthyMe.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UsersWithProducts",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersWithProducts", x => new { x.UserId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_UsersWithProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsersWithProducts_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DietWithProducts",
                 columns: table => new
                 {
@@ -315,6 +340,11 @@ namespace HealthyMe.Data.Migrations
                 name: "IX_DietWithProducts_ProductId",
                 table: "DietWithProducts",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersWithProducts_ProductId",
+                table: "UsersWithProducts",
+                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -342,6 +372,9 @@ namespace HealthyMe.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Trainings");
+
+            migrationBuilder.DropTable(
+                name: "UsersWithProducts");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

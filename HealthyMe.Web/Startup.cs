@@ -19,6 +19,7 @@ namespace HealthyMe.Web
 {
     public class Startup
     {
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -59,7 +60,7 @@ namespace HealthyMe.Web
        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-             app.UseDataBaseMigration();
+            app.UseDataBaseMigration();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

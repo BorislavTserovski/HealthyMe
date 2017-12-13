@@ -1,5 +1,6 @@
 ﻿using HealthyMe.Data.Models;
 using HealthyMe.Services.Admin;
+using HealthyMe.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,10 +16,13 @@ namespace HealthyMe.Web.Controllers
 
         private readonly UserManager<User> users;
 
-        public ProductsController(IProductService products, UserManager<User> users)
+        private readonly IAdminUserService userService;
+
+        public ProductsController(IProductService products, UserManager<User> users, IAdminUserService userService)
         {
             this.products = products;
             this.users = users;
+            this.userService = userService;
         }
 
         public async Task<IActionResult> Index()
@@ -31,7 +35,9 @@ namespace HealthyMe.Web.Controllers
         {
             var userId = this.users.GetUserId(User);
             await this.products.AddToDay(id, userId);
-
+            var user = this.userService.GetUserById(userId);
+            var product = this.products.GetProductById(id);
+            TempData.AddSuccessMessage($"Successfully added product {product.Name}. You have {user.AllowedCalories} allowed more callories for the day.");
             return RedirectToAction(nameof(Index));
         }
     }

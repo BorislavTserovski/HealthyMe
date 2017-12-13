@@ -1,6 +1,10 @@
 ﻿
-
-
+body {
+    background: url('https://i.imgur.com/Nbi7bYI.jpg') no-repeat center center fixed;
+    background-size: cover;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
@@ -22,66 +26,17 @@
 
 /* QR code generator */
 #qrCode {
-    margin: 0px;
+    margin: 15px;
 }
 
 /* Hide/rearrange for smaller screens */
-@media screen and (max-width: 1800px) {
+@media screen and (max-width: 767px) {
     /* Hide captions */
     .carousel-caption {
         display: none;
     }
 }
-/* Header */
-.large-header {
-    position: relative;
-    width: 100%;
-    background: #333;
-    overflow: scroll;
-    background-size: cover;
-    background-position: center center;
-    z-index: 1;
-}
 
-#large-header {
-    background-image: url('http://blog.hostbaby.com/wp-content/uploads/2013/07/scuffedstatic_blue1400x900.jpg');
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    min-width: 50%;
-    min-height: 50%;
-}
-
-.main-title {
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    color: #f9f1e9;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate3d(-50%,-50%,0);
-    transform: translate3d(-50%,-50%,0);
-}
-
-.demo-1 .main-title {
-    text-transform: uppercase;
-    font-size: 4.2em;
-    letter-spacing: 0.1em;
-}
-
-.main-title .thin {
-    font-weight: 200;
-}
-
-@media only screen and (max-width : 1800px) {
-    .demo-1 .main-title {
-        font-size: 3em;
-    }
-}
 
 .button {
     border-radius: 4px;
@@ -126,50 +81,16 @@
     font-family: 'Comic Sans MS';
 }
 
-.menu {
-    font-family: 'Lato', sans-serif;
-    background: #333333;
-    text-align: center;
-    padding: 10px;
-    line-height: 1.5;
-}
-
-#menu a {
-    display: none;
-    text-decoration: none;
-    padding: 5px 20px;
-    cursor: pointer;
-}
-
-.menu-item {
-    display: none;
-    text-decoration: none;
-    padding: 5px 20px;
-    color: #fff;
-    font-size: 16px;
-    max-width: 160px;
-    position: relative;
-    text-transform: uppercase;
-    transition: ease-in .3s;
-}
-
-.menu a:hover {
-    color: #00bbbb;
-}
-
-.tableText {
-    font-family: 'Comic Sans MS';
-    color: #00bbbb;
-}
 
 .imageResize {
     max-width: 250px;
     max-height: 300px;
 }
 
-.inputTextColor{
-    color:#ff0000;
+.searchField{
     border-radius:10px;
 }
+
+
 
 

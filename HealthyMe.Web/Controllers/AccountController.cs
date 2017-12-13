@@ -14,6 +14,7 @@ using HealthyMe.Web.Models;
 using HealthyMe.Web.Models.AccountViewModels;
 
 using HealthyMe.Data.Models;
+using HealthyMe.Services.Admin;
 
 namespace HealthyMe.Web.Controllers
 {
@@ -23,13 +24,13 @@ namespace HealthyMe.Web.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-      
+        private readonly IAdminUserService adminUserManager;
         private readonly ILogger _logger;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-           
+           IAdminUserService adminUserManager,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
@@ -65,7 +66,19 @@ namespace HealthyMe.Web.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Name, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    
+                    var userId = this._userManager.GetUserId(User);
+                    var user = this.adminUserManager.GetUserById(userId);
+                    if (user.Day == null)
+                    {
+                        user.Day = DateTime.Today;
+                    }
+                    else if (user.Day != DateTime.Today)
+                    {
+                        user.AllowedCalories = 2500;
+                    }
                     _logger.LogInformation("User logged in.");
+
                     return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

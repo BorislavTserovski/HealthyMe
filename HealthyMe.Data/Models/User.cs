@@ -18,13 +18,19 @@ namespace HealthyMe.Data.Models
         [DataType(DataType.Date)]
         public DateTime Birthdate { get; set; }
 
-        public List<Article> Articles { get; set; } = new List<Article>();
-
-        public List<Diet> Diets { get; set; } = new List<Diet>();
-
         public double BodyMassIndex { get; set; }
 
         public int AllowedCalories { get; set; }
+
+        public DateTime? Day { get; set; }
+
+        public List<Article> Articles { get; set; } = new List<Article>();
+
+        public List<UserProduct> Products { get; set; } = new List<UserProduct>();
+
+        public List<Diet> Diets { get; set; } = new List<Diet>();
+
+       
 
     }
 }

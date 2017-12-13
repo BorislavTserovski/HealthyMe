@@ -19,11 +19,13 @@ namespace HealthyMe.Services.Admin
 
         Task Delete(int id);
 
-        Task <ProductViewModel> GetById(int id);
+        Task <ProductViewModel> GetByIdAsync(int id);
 
         Task<IEnumerable<ProductListingModel>> Search(string SearchBy, string searchTerm);
 
         Task AddToDay(int id, string userId);
+
+        Product GetProductById(int id);
 
 
 

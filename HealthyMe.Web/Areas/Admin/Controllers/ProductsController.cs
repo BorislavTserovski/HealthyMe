@@ -51,7 +51,7 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
            
-            var product = await this.products.GetById(id);
+            var product = await this.products.GetByIdAsync(id);
             if (product==null)
             {
                 return NotFound();

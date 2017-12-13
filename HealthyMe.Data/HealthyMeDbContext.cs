@@ -14,6 +14,8 @@ namespace HealthyMe.Data
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<UserProduct> UsersWithProducts { get; set; }
+
         public DbSet<DietProduct> DietWithProducts { get; set; }
 
         public DbSet<Article> Articles { get; set; }
@@ -50,6 +52,19 @@ namespace HealthyMe.Data
                 .HasOne(d => d.Author)
                 .WithMany(a => a.Diets)
                 .HasForeignKey(d => d.AuthorId);
+
+            builder.Entity<UserProduct>()
+                .HasKey(up => new { up.UserId, up.ProductId });
+
+            builder.Entity<UserProduct>()
+                .HasOne(up => up.User)
+                .WithMany(u => u.Products)
+                .HasForeignKey(up => up.UserId);
+
+            builder.Entity<UserProduct>()
+                .HasOne(up => up.Product)
+                .WithMany(p => p.Users)
+                .HasForeignKey(up => up.ProductId);
 
             
             base.OnModelCreating(builder);

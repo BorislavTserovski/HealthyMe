@@ -81,12 +81,16 @@ namespace HealthyMe.Services.Admin.Implementations
             await this.db.SaveChangesAsync();
         }
 
-        public async Task<ProductViewModel> GetById(int id)
+        public async Task<ProductViewModel> GetByIdAsync(int id)
         => await
             this.db.Products
                 .Where(p => p.Id == id)
                 .ProjectTo<ProductViewModel>()
                 .FirstOrDefaultAsync();
+
+        public Product GetProductById(int id)
+        => this.db.Products.Where(p => p.Id == id)
+            .FirstOrDefault();
 
         public async Task<IEnumerable<ProductListingModel>> Search(string searchBy, string searchTerm)
         {

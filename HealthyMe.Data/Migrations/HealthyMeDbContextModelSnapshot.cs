@@ -145,6 +145,8 @@ namespace HealthyMe.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<DateTime?>("Day");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -188,6 +190,19 @@ namespace HealthyMe.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("HealthyMe.Data.Models.UserProduct", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("UserId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("UsersWithProducts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -322,6 +337,19 @@ namespace HealthyMe.Data.Migrations
                     b.HasOne("HealthyMe.Data.Models.Product", "Product")
                         .WithMany("Diets")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HealthyMe.Data.Models.UserProduct", b =>
+                {
+                    b.HasOne("HealthyMe.Data.Models.Product", "Product")
+                        .WithMany("Users")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HealthyMe.Data.Models.User", "User")
+                        .WithMany("Products")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
