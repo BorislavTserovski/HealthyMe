@@ -36,8 +36,11 @@ namespace HealthyMe.Services.Admin.Implementations
         }
 
         [AllowAnonymous]
-        public async Task<IEnumerable<ProductListingModel>> AllAsync()
+        public async Task<IEnumerable<ProductListingModel>> AllAsync(int page = 1)
         => await this.db.Products
+            .OrderBy(p => p.Id)
+            .Skip((page - 1) * ServiceConstants.ProductsPageSize)
+            .Take(ServiceConstants.ProductsPageSize)
             .ProjectTo<ProductListingModel>()
             .ToListAsync();
 
@@ -126,5 +129,8 @@ namespace HealthyMe.Services.Admin.Implementations
 
             return null;
         }
+
+        public async Task<int> TotalAsync()
+        =>  await this.db.Products.CountAsync();
     }
 }

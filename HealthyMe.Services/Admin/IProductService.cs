@@ -12,7 +12,7 @@ namespace HealthyMe.Services.Admin
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductListingModel>> AllAsync();
+        Task<IEnumerable<ProductListingModel>> AllAsync(int page = 1);
 
         Task Create(string name, Category category, int energy, double fats,
             double proteins, double sugars, IFormFile file);
@@ -27,7 +27,6 @@ namespace HealthyMe.Services.Admin
 
         Product GetProductById(int id);
 
-
-
+        Task<int> TotalAsync();
     }
 }

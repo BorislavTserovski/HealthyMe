@@ -19,11 +19,14 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
         }
 
         
-        public async Task<IActionResult> Index()
-        {
-            var products = await this.products.AllAsync();
-            return View(products);
-        }
+        public async Task<IActionResult> Index(int page = 1)
+         => View(new ProductListingViewModel
+         {
+             Products = await this.products.AllAsync(page),
+             TotalProducts = await this.products.TotalAsync(),
+             CurrentPage = page
+
+         });
 
 
         public IActionResult Create()

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HealthyMe.Services.Admin.Models.ProductListingModel>
+﻿@model ProductListingViewModel
     @{
         ViewData["Title"] = "Index";
     }
@@ -8,32 +8,32 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                   Name
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.Energy)
+                   Energy KCal
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Fat)
+                    Fat
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Protein)
+                   Proteins
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Sugars)
+                   Sugars
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Image)
+                    Image
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Category)
+                   Category
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Products)
             {
                 <tr>
                     <td>
@@ -71,4 +71,19 @@
             }
         </tbody>
     </table>
+@if (Model.TotalProducts > Model.Products.Count())
+{
+    <ul class="pagination">
+        <li class="@(Model.CurrentPage== 1 ? "disabled" :string.Empty)">
+            <a asp-controller="Products" asp-action="Index" asp-route-page="@Model.PreviousPage" aria-label="Previous">
+                <span aria-hidden="true">&#x21E6;</span>
+            </a>
+        </li>
+        <li class="@(Model.CurrentPage== Model.TotalPages ? "disabled" :string.Empty)">
+            <a  asp-controller="Products" asp-action="Index" asp-route-page="@Model.NextPage" aria-label="Next">
+                <span aria-hidden="true"> &#x21E8;</span>
+            </a>
+        </li>
+    </ul>
+}
 
