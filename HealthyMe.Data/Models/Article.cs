@@ -18,6 +18,8 @@ namespace HealthyMe.Data.Models
         [MinLength(20)]
         public string Content { get; set; }
 
+        public DateTime PublishDate { get; set; }
+
         public string AuthorId { get; set; }
 
         public User Author { get; set; }

@@ -24,13 +24,13 @@ namespace HealthyMe.Web.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IAdminUserService adminUserManager;
+       
         private readonly ILogger _logger;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-           IAdminUserService adminUserManager,
+          
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
@@ -67,16 +67,7 @@ namespace HealthyMe.Web.Controllers
                 if (result.Succeeded)
                 {
                     
-                    var userId = this._userManager.GetUserId(User);
-                    var user = this.adminUserManager.GetUserById(userId);
-                    if (user.Day == null)
-                    {
-                        user.Day = DateTime.Today;
-                    }
-                    else if (user.Day != DateTime.Today)
-                    {
-                        user.AllowedCalories = 2500;
-                    }
+                   
                     _logger.LogInformation("User logged in.");
 
                     return RedirectToLocal(returnUrl);
@@ -234,7 +225,8 @@ namespace HealthyMe.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Name, Email = model.Email, Name = model.Name };
+                var user = new User { UserName = model.Name, Email = model.Email, Name = model.Name
+                , Age = model.Age, Gender = model.Gender, Weight = model.Weight, Height = model.Height};
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

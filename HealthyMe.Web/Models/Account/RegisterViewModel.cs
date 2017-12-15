@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthyMe.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,6 +18,19 @@ namespace HealthyMe.Web.Models.AccountViewModels
         [MinLength(2)]
         [MaxLength(50)]
         public string Name { get; set; }
+
+        public Gender Gender { get; set; }
+
+        [Range(10, 500)]
+        [Display(Name = "Weight in KGs")]
+        public double Weight { get; set; }
+
+        [Range(50, 300)]
+        [Display(Name = "Height in centimeters")]
+        public double Height { get; set; }
+
+        [Range(1, 130)]
+        public int Age { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]

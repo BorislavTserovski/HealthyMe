@@ -34,11 +34,16 @@
                     <li><a asp-area="" asp-controller="Diets" asp-action="All">Diets</a></li>
                     <li><a asp-area="" asp-controller="Calculator" asp-action="Calculate">Calculate your BMI</a></li>
                     <li><a asp-area="" asp-controller="Products" asp-action="Index">Products</a></li>
+                    <li><a asp-area="Writer" asp-controller="Articles" asp-action="Index">Articles</a></li>
                     @if (User.IsInRole(WebConstants.AdministratorRole))
                     {
                         <li><a asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a></li>
                         <li><a asp-area="Admin" asp-controller="Products" asp-action="Create">Create a Product</a></li>
                        
+                    }
+                    @if (User.IsInRole(WebConstants.WriterRole))
+                    {
+                        <li><a asp-area="Writer" asp-controller="Articles" asp-action="Create">Publish Article</a></li>
                     }
 
                   

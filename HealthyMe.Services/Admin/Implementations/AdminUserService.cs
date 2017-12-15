@@ -26,8 +26,63 @@ namespace HealthyMe.Services.Admin.Implementations
             .ProjectTo<AdminListingServiceModel>()
             .ToListAsync();
 
+        public async Task<int> GetUserAllowedCalories(string userId)
+        {
+            var user = this.db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            var BMI = Math.Round(user.Weight / ((user.Height / 100) * (user.Height / 100)), 2);
+            user.BodyMassIndex = BMI;
+
+            if (user.Gender == Gender.male)
+            {
+                if (BMI >= 18.5 && BMI <= 25)
+                {
+                    user.AllowedCalories = 2500;
+                }
+
+                else if (BMI > 25)
+                {
+                    user.AllowedCalories = 2100;
+                }
+
+                else if (BMI < 18.5)
+                {
+                    user.AllowedCalories = 2800;
+                }
+            }
+
+            else if (user.Gender == Gender.female)
+            {
+                if (BMI >= 18.5 && BMI <= 25)
+                {
+                    user.AllowedCalories = 1900;
+                }
+
+                else if (BMI > 25)
+                {
+                    user.AllowedCalories = 1700;
+                }
+
+                else if (BMI < 18.5)
+                {
+                    user.AllowedCalories = 2100;
+                }
+            }
+
+           await db.SaveChangesAsync();
+
+            return user.AllowedCalories;
+        }
+
         public User GetUserById(string id)
         =>  this.db.Users.Where(u => u.Id == id)
             .FirstOrDefault();
+
+        public async Task SetUserDayToCurrent(string userId)
+        {
+            var user = this.db.Users.Where(u => u.Id == userId).FirstOrDefault();
+
+            user.Day = DateTime.Today;
+            await this.db.SaveChangesAsync();
+        }
     }
 }

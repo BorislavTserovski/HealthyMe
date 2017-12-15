@@ -20,46 +20,10 @@ namespace HealthyMe.Services.Implementations
             var user = this.db.Users.Where(u => u.Id == userId).FirstOrDefault();
             var BMI = Math.Round(weight / ((height / 100) * (height / 100)), 2);
             user.BodyMassIndex = BMI;
-            
-            if (gender == Gender.male)
-            {
-                if (BMI >= 18.5 && BMI <= 25)
-                {
-                    user.AllowedCalories = 2500;
-                }
-
-                else if (BMI > 25)
-                {
-                    user.AllowedCalories = 2100;
-                }
-
-                else if (BMI < 18.5)
-                {
-                    user.AllowedCalories = 2800;
-                }
-            }
-
-            else if (gender == Gender.female)
-            {
-                if (BMI >= 18.5 && BMI <= 25)
-                {
-                    user.AllowedCalories = 1900;
-                }
-
-                else if (BMI > 25)
-                {
-                    user.AllowedCalories = 1700;
-                }
-
-                else if (BMI < 18.5)
-                {
-                    user.AllowedCalories = 2100;
-                }
-            }
 
             db.SaveChanges();
 
-            return Math.Round(weight / ((height / 100) * (height / 100)), 2);
+            return BMI;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using HealthyMe.Data.Models;
 using HealthyMe.Services.Admin;
 using HealthyMe.Web.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,12 +26,26 @@ namespace HealthyMe.Web.Controllers
             this.userService = userService;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
+            var userId = this.users.GetUserId(User);
+            var user = this.userService.GetUserById(userId);
+            if (user.Day == null)
+            {
+                await this.userService.SetUserDayToCurrent(userId);
+                user.AllowedCalories = await this.userService.GetUserAllowedCalories(userId);
+            }
+            if (user.Day != DateTime.Today)
+            {
+                user.AllowedCalories = await this.userService.GetUserAllowedCalories(userId);
+                await this.userService.SetUserDayToCurrent(userId);
+            }
             var products = await this.products.AllAsync();
             return View(products);
         }
 
+        [Authorize]
         public async Task<IActionResult>AddToDay(int id)
         {
             var userId = this.users.GetUserId(User);

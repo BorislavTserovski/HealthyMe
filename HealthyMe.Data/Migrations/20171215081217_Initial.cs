@@ -29,13 +29,15 @@ namespace HealthyMe.Data.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
                     AllowedCalories = table.Column<int>(nullable: false),
-                    Birthdate = table.Column<DateTime>(nullable: false),
                     BodyMassIndex = table.Column<double>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Day = table.Column<DateTime>(nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
+                    Gender = table.Column<int>(nullable: false),
+                    Height = table.Column<double>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
@@ -46,7 +48,8 @@ namespace HealthyMe.Data.Migrations
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Weight = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,6 +83,9 @@ namespace HealthyMe.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: false),
+                    IsForGainingWeight = table.Column<bool>(nullable: false),
+                    IsForLoosingWeight = table.Column<bool>(nullable: false),
+                    MuscleGroup = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
                     VideoUrl = table.Column<string>(nullable: true)
                 },
@@ -117,6 +123,7 @@ namespace HealthyMe.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AuthorId = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: false),
+                    PublishDate = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -264,6 +271,30 @@ namespace HealthyMe.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UsersWithTrainings",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    TrainingId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersWithTrainings", x => new { x.UserId, x.TrainingId });
+                    table.ForeignKey(
+                        name: "FK_UsersWithTrainings_Trainings_TrainingId",
+                        column: x => x.TrainingId,
+                        principalTable: "Trainings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsersWithTrainings_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DietWithProducts",
                 columns: table => new
                 {
@@ -345,6 +376,11 @@ namespace HealthyMe.Data.Migrations
                 name: "IX_UsersWithProducts_ProductId",
                 table: "UsersWithProducts",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersWithTrainings_TrainingId",
+                table: "UsersWithTrainings",
+                column: "TrainingId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -371,10 +407,10 @@ namespace HealthyMe.Data.Migrations
                 name: "DietWithProducts");
 
             migrationBuilder.DropTable(
-                name: "Trainings");
+                name: "UsersWithProducts");
 
             migrationBuilder.DropTable(
-                name: "UsersWithProducts");
+                name: "UsersWithTrainings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -384,6 +420,9 @@ namespace HealthyMe.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Trainings");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -20,6 +20,14 @@ namespace HealthyMe.Data.Models
 
         public string VideoUrl { get; set; }
 
-       
+        public bool IsForLoosingWeight { get; set; }
+
+        public bool IsForGainingWeight { get; set; }
+
+        public MuscleGroup MuscleGroup  { get; set; }
+
+        public List<UserTraining> Users { get; set; } = new List<UserTraining>();
+
+
     }
 }

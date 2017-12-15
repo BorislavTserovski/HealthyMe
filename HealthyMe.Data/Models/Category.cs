@@ -8,7 +8,10 @@ namespace HealthyMe.Data.Models
 {
     public enum Category
     {
-      Food = 0,
-      Drink = 1
+      Meats = 0,
+      Drinks = 1,
+      Fruits = 2,
+      Vegetables = 3,
+      Snacks = 4
     }
 }

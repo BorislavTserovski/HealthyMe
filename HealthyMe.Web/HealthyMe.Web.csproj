@@ -25,11 +25,4 @@
     <ProjectReference Include="..\HealthyMe.Services\HealthyMe.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Writer\Controllers\" />
-    <Folder Include="Areas\Writer\Data\" />
-    <Folder Include="Areas\Writer\Models\" />
-    <Folder Include="Areas\Writer\Views\" />
-  </ItemGroup>
-
 </Project>

@@ -12,7 +12,7 @@ using System;
 namespace HealthyMe.Data.Migrations
 {
     [DbContext(typeof(HealthyMeDbContext))]
-    [Migration("20171213095541_Initial")]
+    [Migration("20171215081217_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,8 @@ namespace HealthyMe.Data.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired();
+
+                    b.Property<DateTime>("PublishDate");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -119,6 +121,12 @@ namespace HealthyMe.Data.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
+                    b.Property<bool>("IsForGainingWeight");
+
+                    b.Property<bool>("IsForLoosingWeight");
+
+                    b.Property<int>("MuscleGroup");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);
@@ -137,9 +145,9 @@ namespace HealthyMe.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<int>("AllowedCalories");
+                    b.Property<int>("Age");
 
-                    b.Property<DateTime>("Birthdate");
+                    b.Property<int>("AllowedCalories");
 
                     b.Property<double>("BodyMassIndex");
 
@@ -152,6 +160,10 @@ namespace HealthyMe.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<int>("Gender");
+
+                    b.Property<double>("Height");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -180,6 +192,8 @@ namespace HealthyMe.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
+                    b.Property<double>("Weight");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -204,6 +218,19 @@ namespace HealthyMe.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("UsersWithProducts");
+                });
+
+            modelBuilder.Entity("HealthyMe.Data.Models.UserTraining", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<int>("TrainingId");
+
+                    b.HasKey("UserId", "TrainingId");
+
+                    b.HasIndex("TrainingId");
+
+                    b.ToTable("UsersWithTrainings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -350,6 +377,19 @@ namespace HealthyMe.Data.Migrations
 
                     b.HasOne("HealthyMe.Data.Models.User", "User")
                         .WithMany("Products")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HealthyMe.Data.Models.UserTraining", b =>
+                {
+                    b.HasOne("HealthyMe.Data.Models.Training", "Training")
+                        .WithMany("Users")
+                        .HasForeignKey("TrainingId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HealthyMe.Data.Models.User", "User")
+                        .WithMany("Trainings")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

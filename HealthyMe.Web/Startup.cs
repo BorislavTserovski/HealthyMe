@@ -39,6 +39,7 @@ namespace HealthyMe.Web
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 1;
             })
              .AddEntityFrameworkStores<HealthyMeDbContext>()
              .AddDefaultTokenProviders();

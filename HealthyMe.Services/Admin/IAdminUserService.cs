@@ -12,5 +12,9 @@ namespace HealthyMe.Services.Admin
         Task<IEnumerable<AdminListingServiceModel>> AllAsync();
 
         User GetUserById(string id);
+
+        Task<int> GetUserAllowedCalories(string userId);
+
+        Task SetUserDayToCurrent(string userId);
     }
 }

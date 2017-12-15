@@ -61,7 +61,7 @@ namespace HealthyMe.Web.Infrastructure.Extensions
                                 Email = adminEmail,
                                 UserName = adminName,
                                 Name = "admin",
-                                Birthdate = DateTime.UtcNow
+                                
                             };
 
                             await userManager.CreateAsync(adminUser, "admin123");
