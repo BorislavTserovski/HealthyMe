@@ -7,19 +7,52 @@
 
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4" >
+        <div class="container">
+            
+            <div class="dropdown">
+                <button class="menuButton dropdown-toggle" type="button" data-toggle="dropdown">
+                    <span class="headerText">Menu</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li ><a asp-area="" asp-controller="Products" asp-action="Index"><span class="menuListItem">Foods And Drinks</span></a></li>
+                    <li ><a asp-area="" asp-controller="Calculator" asp-action="Calculate"><span class="menuListItem">Body Mass Index Calculator</span></a></li>
+                    <li ><a asp-area="Writer" asp-controller="Articles" asp-action="Index"><span class="menuListItem">Articles</span></a></li>
+                    <li ><a asp-area="" asp-controller="Diets" asp-action="All"><span class="menuListItem">Browse Diets</span></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $(".dropdown").on("hide.bs.dropdown", function () {
+                    $(".btn").html('Dropdown <span class="caret"></span>');
+                });
+                $(".dropdown").on("show.bs.dropdown", function () {
+                    $(".btn").html('Dropdown <span class="caret caret-up"></span>');
+                });
+            });
+        </script>
+    </div>
+    
+    <div class="col-md-4">
         <p>
             @using (Html.BeginForm("Index", "Home", FormMethod.Get))
             {
-                <b>Search by: </b>@Html.RadioButton("SearchBy", "Name", true)<text> Name</text>
+                <b class="headerText">Search by: </b>@Html.RadioButton("SearchBy", "Name", true) <span class="headerText">Name</span>
 
 
-                @Html.RadioButton("SearchBy", "Category") <text>Category</text><br />
+                @Html.RadioButton("SearchBy", "Category") <span class="headerText">Category</span><br />
                 @Html.TextBox("searchTerm", null, new { @class = "searchField" })
-                <input type="submit" class="btn btn-primary" value="Search" />
+                <input type="submit" class="btn btn-primary headerText" value="Search" />
             }
         </p>
     </div>
+    <div class="col-md-4">
+
+    </div>
+    
    
     @if (Model.Any())
     {
@@ -48,13 +81,13 @@
                         <td>
                             @if (item.Image != null)
                             {
-                              <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" class="imageResize" style="max-width:250px;max-height:300px;" />
+                              <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" class="imageResize" style="max-height:300px;" />
                             }
                         </td>
 
                         <td>
 
-                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                            <a asp-controller="Products" asp-action="AddToDay" asp-route-id="@item.Id" class="btn btn-info">Add</a>
 
                         </td>
                     </tr>

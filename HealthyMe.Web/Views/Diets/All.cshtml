@@ -11,63 +11,64 @@
     var nextDisabled = Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty;
 }
 <div class="body">
-    <h2>List Of Diets</h2>
+    <h2 class="headerText">List Of Diets</h2>
     <a class="btn btn-primary" href="/diets/create">Add Your Diet</a>
     <ul class="pagination  ">
         <li class="page-item  @previousDisabled">
-            <a class="page-link  @previousDisabled" href="/diets/all?page=@Model.PreviousPage" tabindex="-1">Previous</a>
+            <a class="page-link  @previousDisabled" href="/diets/all?page=@Model.PreviousPage" tabindex="-1"><span class="headerText">Previous</span></a>
         </li>
         @for (int i = 1; i <= Model.TotalPages; i++)
         {
             <li class="page-item @(Model.CurrentPage==i?"active":string.Empty)"><a class="page-link" href="/diets/all?page=@i">@i</a></li>
         }
         <li class="page-item  @nextDisabled">
-            <a class="page-link @nextDisabled" href="/diets/all?page=@Model.NextPage">Next</a>
+            <a class="page-link @nextDisabled" href="/diets/all?page=@Model.NextPage"><span class="headerText">Next</span></a>
         </li>
     </ul>
 
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Content
-                </th>
-                <th>
-                    Picture
-                </th>
-
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Diets)
-            {
+    
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @if (item.Image != null)
-                        {
-                            <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" class="imageResize" style="max-width:250px;max-height:300px;" />
-                        }
-                    </td>
+                    <th class="headerText">
+                        Name
+                    </th>
+                    <th class="headerText">
+                        The Diet
+                    </th>
+                    <th class="headerText">
+                        Picture
+                    </th>
 
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                    </td>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Diets)
+            {
+                    <tr>
+                        <td class="col-md-3">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @if (item.Image != null)
+                            {
+                                <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" class="imageResize" style="max-width:250px;max-height:300px;" />
+                            }
+                        </td>
+
+                        <td class="col-md-3">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+   
 </div>
 

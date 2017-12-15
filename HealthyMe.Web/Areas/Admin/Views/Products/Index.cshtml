@@ -12,26 +12,26 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
+                <th class="headerText">
                     Name
                 </th>
               
-                <th>
+                <th class="headerText">
                    Energy KCal
                 </th>
-                <th>
+                <th class="headerText">
                    Fat
                 </th>
-                <th>
+                <th class="headerText">
                    Proteins
                 </th>
-                <th>
+                <th class="headerText">
                    Sugars
                 </th>
-                <th>
+                <th class="headerText">
                     Image
                 </th>
-            <th>
+            <th class="headerText">
                Category
             </th>
             <th></th>
@@ -78,13 +78,13 @@
 {
     <ul class="pagination">
         <li class="@(Model.CurrentPage== 1 ? "disabled" :string.Empty)">
-            <a asp-controller="Products" asp-action="Index" asp-route-page="@Model.PreviousPage" aria-label="Previous">
-                <span aria-hidden="true">&raquo;</span>
+            <a asp-controller="Products" asp-action="Index" asp-route-page="@Model.PreviousPage" aria-label="Previous" class="previous">
+                <span aria-hidden="true">Prev</span>
             </a>
         </li>
         <li class="@(Model.CurrentPage== Model.TotalPages ? "disabled" :string.Empty)">
-            <a asp-controller="Products" asp-action="Index" asp-route-page="@Model.NextPage" aria-label="Next">
-                <span aria-hidden="true"> &#x21E8;</span>
+            <a asp-controller="Products" asp-action="Index" asp-route-page="@Model.NextPage" aria-label="Next" class="next">
+                <span aria-hidden="true"> Next</span>
             </a>
         </li>
     </ul>

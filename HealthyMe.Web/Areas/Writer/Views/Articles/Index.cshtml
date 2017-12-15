@@ -1,21 +1,31 @@
 ﻿
 @model ArticleListingViewModel
 @{
-    ViewData["Title"] = "Blog Articles";
+    ViewData["Title"] = "Articles";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2 class="headerText">@ViewData["Title"]</h2>
 
 <div class="row">
     <div class="col-md-6">
         <ul>
-            @foreach (var article in Model.Articles)
-            {
-                <li class="list-group-item">
-                    <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id"> @article.Title</a>
-                    <small>published by @article.Author on @article.PublishDate</small>
-                </li>
-            }
+           @for (int i = 0; i < Model.Articles.Count(); i++)
+           {
+               string article = $"#article{i}";
+               string id = $"article{i}";
+            <li class="list-group-item">
+                <div>
+                    <a href="@article" data-toggle="collapse" class="btn btn-info"><span class="headerText">@Model.Articles.ElementAt(i).Title</span></a>
+                    <a asp-controller="Articles" asp-action="Details" asp-route-id="@Model.Articles.ElementAt(i).Id" class="btn btn-default"> Details</a>
+                    <small>published by @Model.Articles.ElementAt(i).Author on @Model.Articles.ElementAt(i).PublishDate.ToShortDateString()</small>
+                </div>
+                <div id="@id" class="collapse">
+                    
+                      @Model.Articles.ElementAt(i).Content 
+                   
+                </div>
+            </li>
+           }
         </ul>
     </div>
 </div>
@@ -24,13 +34,13 @@
 {
     <ul class="pagination">
         <li class="@(Model.CurrentPage== 1 ? "disabled" :string.Empty)">
-            <a asp-controller="Articles" asp-action="Index" asp-route-page="@Model.PreviousPage" aria-label="Previous">
-                <span aria-hidden="true">&#x21E6;</span>
+            <a asp-controller="Articles" asp-action="Index" asp-route-page="@Model.PreviousPage" aria-label="Previous" class="previous">
+                <span aria-hidden="true">Prev</span>
             </a>
         </li>
         <li class="@(Model.CurrentPage== Model.TotalPages ? "disabled" :string.Empty)">
-            <a a asp-controller="Articles" asp-action="Index" asp-route-page="@Model.NextPage" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
+            <a a asp-controller="Articles" asp-action="Index" asp-route-page="@Model.NextPage" aria-label="Next" class="next">
+                <span aria-hidden="true">Next</span>
             </a>
         </li>
     </ul>

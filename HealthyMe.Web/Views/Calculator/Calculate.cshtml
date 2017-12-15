@@ -8,34 +8,35 @@
 
 
 <form method="post">
-    <div class="form-control">
-        <label asp-for="Gender"></label>
-        <select asp-for="Gender" style="color:black">
-            <option value="male">male</option>
-            <option value="female">female</option>
-        </select>
-        <span asp-validation-for="Weight" class="form-text text-danger"></span>
+    <div class="row col-md-6 alert alert-warning">
+        <div>
+            <label asp-for="Gender"></label>
+            <select asp-for="Gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <span asp-validation-for="Weight" class="form-text text-danger"></span>
 
+        </div>
+        <div class="form-group">
+            <label asp-for="Weight"></label>
+            <input asp-for="Weight" class="form-control" type="number" value="60" required />
+            <span asp-validation-for="Weight" class="form-text text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Height"></label>
+            <input asp-for="Height" type="number" value="160" class="form-control" required />
+            <span asp-validation-for="Height" class="form-text text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Age"></label>
+            <input asp-for="Age" class="form-control" value="20" required />
+            <span asp-validation-for="Age" class="form-text text-danger"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="button btn-success"><span class="headerText">Calculate </span></button>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Weight"></label>
-        <input asp-for="Weight" class="form-control" type="number" value="60" required />
-        <span asp-validation-for="Weight" class="form-text text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Height"></label>
-        <input asp-for="Height" type="number" value="160" class="form-control" required />
-        <span asp-validation-for="Height" class="form-text text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Age"></label>
-        <input asp-for="Age" class="form-control" value="20" required />
-        <span asp-validation-for="Age" class="form-text text-danger"></span>
-    </div>
-    <div class="form-group">
-        <button type="submit" class="button btn-success"><span class="headerText">Calculate </span></button>
-    </div>
-
 
 </form>
 

@@ -9,6 +9,7 @@ using HealthyMe.Services;
 using HealthyMe.Services.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using HealthyMe.Services.Html;
 
 namespace HealthyMe.Web.Controllers
 {
@@ -17,11 +18,13 @@ namespace HealthyMe.Web.Controllers
         private const int PageSize = 5;
         private readonly UserManager<User> userManager;
         private readonly IDietService diets;
+        private readonly IHtmlService html;
 
-        public DietsController(IDietService diets, UserManager<User> userManager)
+        public DietsController(IDietService diets, UserManager<User> userManager, IHtmlService html)
         {
             this.userManager = userManager;
             this.diets = diets;
+            this.html = html;
         }
 
         public IActionResult All(int page = 1)
@@ -44,9 +47,13 @@ namespace HealthyMe.Web.Controllers
         [Authorize]
         public IActionResult Create(DietFormModel dietModel, IFormFile file)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(dietModel);
+            }
             string userId = userManager.GetUserId(User);
-
-            this.diets.Add(dietModel.Name, dietModel.Description, file, userId);
+            string sanitizedDescription = this.html.Sanitize(dietModel.Description);
+            this.diets.Add(dietModel.Name, sanitizedDescription, file, userId);
 
             return RedirectToAction(nameof(All));
         }
