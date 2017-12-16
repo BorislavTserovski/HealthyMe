@@ -12,7 +12,7 @@ using System;
 namespace HealthyMe.Data.Migrations
 {
     [DbContext(typeof(HealthyMeDbContext))]
-    [Migration("20171215081217_Initial")]
+    [Migration("20171216091611_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,8 @@ namespace HealthyMe.Data.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired();
+
+                    b.Property<byte[]>("Image");
 
                     b.Property<DateTime>("PublishDate");
 

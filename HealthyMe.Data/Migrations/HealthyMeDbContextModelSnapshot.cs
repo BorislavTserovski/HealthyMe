@@ -31,6 +31,8 @@ namespace HealthyMe.Data.Migrations
                     b.Property<string>("Content")
                         .IsRequired();
 
+                    b.Property<byte[]>("Image");
+
                     b.Property<DateTime>("PublishDate");
 
                     b.Property<string>("Title")

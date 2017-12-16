@@ -15,5 +15,7 @@ namespace HealthyMe.Web.Areas.Writer.Models.Articles
         [Required]
         [MinLength(5)]
         public string Content { get; set; }
+
+        public byte[] Image { get; set; }
     }
 }

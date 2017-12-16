@@ -123,6 +123,7 @@ namespace HealthyMe.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AuthorId = table.Column<string>(nullable: true),
                     Content = table.Column<string>(nullable: false),
+                    Image = table.Column<byte[]>(nullable: true),
                     PublishDate = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(maxLength: 50, nullable: false)
                 },

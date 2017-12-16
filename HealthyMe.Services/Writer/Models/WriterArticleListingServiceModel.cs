@@ -19,6 +19,7 @@ namespace HealthyMe.Services.Writer.Models
 
         public DateTime PublishDate { get; set; }
 
+        public byte[] Image { get; set; }
 
         public string Author { get; set; }
 

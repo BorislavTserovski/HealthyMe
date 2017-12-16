@@ -3,6 +3,7 @@ using HealthyMe.Services.Html;
 using HealthyMe.Services.Writer;
 using HealthyMe.Web.Areas.Writer.Models.Articles;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -37,18 +38,14 @@ namespace HealthyMe.Web.Areas.Writer.Controllers
 
         });
 
-        public async Task<IActionResult> Details(int id)
-        {
-            return View(await this.articles.ById(id));
-        }
-        
+     
 
 
 
         public IActionResult Create() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Create(PublishArticleFormModel model)
+        public async Task<IActionResult> Create(PublishArticleFormModel model, IFormFile file)
         {
             if (!ModelState.IsValid)
             {
@@ -57,7 +54,7 @@ namespace HealthyMe.Web.Areas.Writer.Controllers
 
             model.Content = this.html.Sanitize(model.Content);
             var userId = this.userManager.GetUserId(User);
-            await this.articles.CreateAsync(model.Title, model.Content, userId);
+            await this.articles.CreateAsync(model.Title, model.Content, userId, file);
 
             return RedirectToAction(nameof(Index));
 

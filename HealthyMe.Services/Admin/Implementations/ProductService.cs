@@ -27,6 +27,7 @@ namespace HealthyMe.Services.Admin.Implementations
         public async Task AddToDay(int id, string userId)
         {
             Product product = this.db.Products.Where(p => p.Id == id).FirstOrDefault();
+            
             User user = this.db.Users.Where(u => u.Id == userId).FirstOrDefault();
             user.AllowedCalories -= product.Energy;
 

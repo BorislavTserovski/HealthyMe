@@ -19,12 +19,16 @@ namespace HealthyMe.Data.Models
         public Category Category { get; set; }
 
 
+        [Range(0, 10000)]
         public int Energy { get; set; }
 
+        [Range(0, 10000)]
         public double Fat { get; set; }
 
+        [Range(0, 10000)]
         public double Protein { get; set; }
 
+        [Range(0, 10000)]
         public double Sugars { get; set; }
 
         public byte[] Image { get; set; }

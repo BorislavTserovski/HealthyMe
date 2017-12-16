@@ -16,13 +16,21 @@
             <li class="list-group-item">
                 <div>
                     <a href="@article" data-toggle="collapse" class="btn btn-info"><span class="headerText">@Model.Articles.ElementAt(i).Title</span></a>
-                    <a asp-controller="Articles" asp-action="Details" asp-route-id="@Model.Articles.ElementAt(i).Id" class="btn btn-default"> Details</a>
-                    <small>published by @Model.Articles.ElementAt(i).Author on @Model.Articles.ElementAt(i).PublishDate.ToShortDateString()</small>
+                    
+                    <small style="margin:5px">  published by @Model.Articles.ElementAt(i).Author on @Model.Articles.ElementAt(i).PublishDate.ToShortDateString()</small>
                 </div>
                 <div id="@id" class="collapse">
+                    <div>
+                        @if (@Model.Articles.ElementAt(i).Image != null)
+                        {
+                            <img src="data:image;base64,@System.Convert.ToBase64String(Model.Articles.ElementAt(i).Image)" class="imageResize" style="max-width:250px;max-height:300px;" />
+                        }
+                    </div>
+                    <div>
+                        @Model.Articles.ElementAt(i).Content
+                        
+                    </div>
                     
-                      @Model.Articles.ElementAt(i).Content 
-                   
                 </div>
             </li>
            }

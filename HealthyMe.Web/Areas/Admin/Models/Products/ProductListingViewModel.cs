@@ -23,5 +23,7 @@ namespace HealthyMe.Web.Areas.Admin.Models.Products
         public int PreviousPage => this.CurrentPage <= 1 ? 1 : this.CurrentPage - 1;
 
         public int TotalProducts { get; set; }
+
+       
     }
 }

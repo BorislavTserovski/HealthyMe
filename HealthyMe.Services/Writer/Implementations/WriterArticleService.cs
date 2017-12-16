@@ -2,9 +2,11 @@
 using HealthyMe.Data;
 using HealthyMe.Data.Models;
 using HealthyMe.Services.Writer.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +36,7 @@ namespace HealthyMe.Services.Writer.Implementations
             .ProjectTo<WriterArticleDetailsServiceModel>()
             .FirstOrDefaultAsync();
 
-        public async Task CreateAsync(string title, string content, string authorId)
+        public async Task CreateAsync(string title, string content, string authorId, IFormFile file)
         {
             var article = new Article
             {
@@ -43,6 +45,15 @@ namespace HealthyMe.Services.Writer.Implementations
                 PublishDate = DateTime.UtcNow,
                 AuthorId = authorId
             };
+            using (MemoryStream ms = new MemoryStream())
+            {
+                if (file != null)
+                {
+                    file.CopyTo(ms);
+                    byte[] array = ms.GetBuffer();
+                    article.Image = array;
+                }
+            }
 
             this.db.Add(article);
 

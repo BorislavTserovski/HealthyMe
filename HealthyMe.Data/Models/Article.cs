@@ -20,6 +20,8 @@ namespace HealthyMe.Data.Models
 
         public DateTime PublishDate { get; set; }
 
+        public byte[] Image { get; set; }
+
         public string AuthorId { get; set; }
 
         public User Author { get; set; }
