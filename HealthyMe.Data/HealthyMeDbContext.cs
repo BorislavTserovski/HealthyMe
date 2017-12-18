@@ -81,6 +81,10 @@ namespace HealthyMe.Data
                 .WithMany(t => t.Users)
                 .HasForeignKey(ut => ut.TrainingId);
 
+            builder.Entity<User>()
+                .HasMany(u => u.MyProducts)
+                .WithOne(mp => mp.User)
+                .HasForeignKey(mp => mp.UserId);
             
             base.OnModelCreating(builder);
         }

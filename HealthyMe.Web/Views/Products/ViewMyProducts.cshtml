@@ -1,0 +1,80 @@
+﻿
+
+
+@model UserWithProductsServiceModel
+@{
+    ViewData["Title"] = "All My Products";
+}
+
+@if (Model.AllowedCalories >= 0)
+{
+    <h1 class="headerText">@Model.Name  - You Have <span class="numbersFont">@Model.AllowedCalories</span>  KCal Left For Today!</h1>
+}
+else
+{
+    <h1 class="headerText">@Model.Name  - You Have Exceeded Your Daily Calories By <span class="numbersFont">@Math.Abs(Model.AllowedCalories)</span> KCal</h1>
+}
+
+
+<h2 class="headerText">@ViewData["Title"]</h2>
+
+<a asp-area="" asp-controller="Products" asp-action="Index" class="btn btn-primary headerText">Add more</a>
+<a class="btn btn-danger" asp-area="" asp-controller="Products" asp-action="ClearList">Clear</a>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="headerText">
+                Name
+            </th>
+            <th class="headerText">
+                Energy KCal
+            </th>
+            <th class="headerText">
+                Picture
+            </th>
+            <th class="headerText">Total Calories</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+            {
+            <tr>
+                <td class="col-md-3">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Energy)
+                </td>
+                <td>
+                    @if (item.Image != null)
+                    {
+                        <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" class="imageResize" style="max-width:250px;max-height:300px;" />
+                    }
+                </td>
+                <td></td>
+
+                
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                @Model.Products.Sum(p=>p.Energy)
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,5 @@
 ﻿using HealthyMe.Data.Models;
+using HealthyMe.Services;
 using HealthyMe.Services.Admin;
 using HealthyMe.Web.Areas.Admin.Models.Products;
 using HealthyMe.Web.Infrastructure.Extensions;
@@ -18,12 +19,18 @@ namespace HealthyMe.Web.Controllers
 
         private readonly UserManager<User> users;
 
-        private readonly IAdminUserService userService;
+        private readonly IAdminUserService adminUserService;
 
-        public ProductsController(IProductService products, UserManager<User> users, IAdminUserService userService)
+        private readonly IUserService userService; 
+
+        public ProductsController(IProductService products,
+            UserManager<User> users,
+            IAdminUserService adminUserService,
+            IUserService userService)
         {
             this.products = products;
             this.users = users;
+            this.adminUserService = adminUserService;
             this.userService = userService;
         }
 
@@ -31,16 +38,16 @@ namespace HealthyMe.Web.Controllers
         public async Task<IActionResult> Index(int page = 1)
         {
             var userId = this.users.GetUserId(User);
-            var user = this.userService.GetUserById(userId);
+            var user = this.adminUserService.GetUserById(userId);
             if (user.Day == null)
             {
-                await this.userService.SetUserDayToCurrent(userId);
-                user.AllowedCalories = await this.userService.GetUserAllowedCalories(userId);
+                await this.adminUserService.SetUserDayToCurrent(userId);
+                user.AllowedCalories = await this.adminUserService.GetUserAllowedCalories(userId);
             }
             if (user.Day != DateTime.Today)
             {
-                user.AllowedCalories = await this.userService.GetUserAllowedCalories(userId);
-                await this.userService.SetUserDayToCurrent(userId);
+                user.AllowedCalories = await this.adminUserService.GetUserAllowedCalories(userId);
+                await this.adminUserService.SetUserDayToCurrent(userId);
             }
            return View(new ProductListingViewModel
               {
@@ -56,10 +63,42 @@ namespace HealthyMe.Web.Controllers
         {
             var userId = this.users.GetUserId(User);
             await this.products.AddToDay(id, userId);
-            var user = this.userService.GetUserById(userId);
+            var user = this.adminUserService.GetUserById(userId);
             var product = this.products.GetProductById(id);
-            TempData.AddSuccessMessage($"Successfully added product {product.Name}. You have {user.AllowedCalories} allowed more callories for the day.");
+            if (user.AllowedCalories >=0)
+            {
+                TempData.AddSuccessMessage($"Successfully added product {product.Name}. You have {user.AllowedCalories} allowed more callories for the day.");
+            }
+            else
+            {
+                TempData.AddSuccessMessage($"Successfully added product {product.Name}. You have exceede your allowed calories  with {Math.Abs(user.AllowedCalories)}!");
+            }
+          
             return RedirectToAction(nameof(Index));
+        }
+
+        [Authorize]
+        public async Task<IActionResult>ViewMyProducts()
+        {
+            string userId = this.users.GetUserId(User);
+
+            var userWithProducts = await this.userService.MyProducts(userId);
+
+            return View(userWithProducts);
+
+        }
+
+        [Authorize]
+        public async Task<IActionResult> ClearList()
+        {
+            string userId = this.users.GetUserId(User);
+            var user = this.adminUserService.GetUserById(userId);
+            user.AllowedCalories = await this.adminUserService.GetUserAllowedCalories(userId);
+
+            await this.userService.ClearFoodAndDrinksList(userId);
+
+            return RedirectToAction(nameof(ViewMyProducts));
+
         }
     }
 }

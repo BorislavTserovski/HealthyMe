@@ -15,11 +15,24 @@
                     <span class="headerText">Menu</span>
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
-                    <li ><a asp-area="" asp-controller="Products" asp-action="Index"><span class="menuListItem">Foods And Drinks</span></a></li>
-                    <li ><a asp-area="" asp-controller="Calculator" asp-action="Calculate"><span class="menuListItem">Body Mass Index Calculator</span></a></li>
-                    <li ><a asp-area="Writer" asp-controller="Articles" asp-action="Index"><span class="menuListItem">Articles</span></a></li>
-                    <li ><a asp-area="" asp-controller="Diets" asp-action="All"><span class="menuListItem">Browse Diets</span></a></li>
+                <ul class="dropdown-menu dropdownItem">
+                    <li><a asp-area="" asp-controller="Products" asp-action="Index"><span class="menuListItem">Add Foods And Drinks</span></a></li>
+                    <li><a asp-area="" asp-controller="Calculator" asp-action="Calculate"><span class="menuListItem">Body Mass Index Calculator</span></a></li>
+                    <li><a asp-area="Writer" asp-controller="Articles" asp-action="Index"><span class="menuListItem">Articles</span></a></li>
+                    <li><a asp-area="" asp-controller="Diets" asp-action="All"><span class="menuListItem">Browse Diets</span></a></li>
+                    <li><a asp-area="" asp-controller="Products" asp-action="ViewMyProducts"><span class="menuListItem">My Foods And Drinks
+                           </span></a>
+                        <ul class=" dropdownItem">
+                            
+                            <li><a asp-area="" asp-controller="Products" asp-action="GetFoods"><span class="menuListItem">Foods</span> </a></li>
+                                <li><a asp-area="" asp-controller="Products" asp-action="GetDrinks"><span class="menuListItem">Drinks</span></a></li>
+                            <li> <a asp-area="" asp-controller="Products" asp-action="GetOthers"><span class="menuListItem">Others</span></a>  </li>
+
+                          
+                        </ul>
+                    </li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About"><span class="menuListItem">About Us</span></a></li>
+                    <li> <a asp-area="" asp-controller="Home" asp-action="Contact"><span class="menuListItem">Contact Us</span></a></li>
                 </ul>
             </div>
         </div>
@@ -95,7 +108,21 @@
             </tbody>
         </table>
     }
-    
+    else
+    {
+         <div class="row col-md-8">
+             <iframe width="854" height="480" src="https://www.youtube.com/embed/uhkndzWeG9o" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
+
+             </iframe>
+             <iframe width="854" height="480" src="https://www.youtube.com/embed/VUyEPf-IvdM" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
+
+             </iframe>
+             <iframe width="854" height="480" src="https://www.youtube.com/embed/qWy_aOlB45Y" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen>
+
+             </iframe>
+         </div>
+    }
+
 
 
 

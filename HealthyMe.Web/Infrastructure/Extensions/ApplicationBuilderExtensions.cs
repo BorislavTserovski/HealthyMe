@@ -29,9 +29,11 @@ namespace HealthyMe.Web.Infrastructure.Extensions
 
                         var roles = new[]
                         {
-                            WebConstants.AdministratorRole,
+                             WebConstants.AdministratorRole,
 
-                             WebConstants.WriterRole
+                             WebConstants.WriterRole,
+
+                             WebConstants.TrainerRole
 
                         };
 
@@ -61,6 +63,10 @@ namespace HealthyMe.Web.Infrastructure.Extensions
                                 Email = adminEmail,
                                 UserName = adminName,
                                 Name = "admin",
+                                Age = 29,
+                                Weight = 87,
+                                Height = 191,
+                                Gender = Gender.male
                                 
                             };
 

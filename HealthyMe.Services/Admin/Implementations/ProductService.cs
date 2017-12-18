@@ -29,6 +29,17 @@ namespace HealthyMe.Services.Admin.Implementations
             Product product = this.db.Products.Where(p => p.Id == id).FirstOrDefault();
             
             User user = this.db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            user.MyProducts.Add(product);
+            
+            if (!this.db.UsersWithProducts.Any(p=>p.ProductId==product.Id&&p.UserId==user.Id))
+            {
+                this.db.Add(new UserProduct
+                {
+                    UserId = user.Id,
+                    ProductId = product.Id
+                });
+            }
+           
             user.AllowedCalories -= product.Energy;
 
             await this.db.SaveChangesAsync();

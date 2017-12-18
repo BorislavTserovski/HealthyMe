@@ -110,7 +110,7 @@ body {
     }
 
 .menuButton {
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: #cc66ff;
     border: none;
     color: #FFFFFF;
@@ -152,7 +152,8 @@ body {
 .menuListItem {
     font-family: 'Comic Sans MS';
     color:blueviolet;
-    
+    margin:20px;
+    font-size:21px;
     
 }
     .menuListItem:hover {
@@ -162,4 +163,12 @@ body {
 .articleText{
     font-style:italic;
     color: wheat;
+}
+.numbersFont {
+    color: #009999
+}
+
+.dropdownItem {
+    background-color: #cc99ff;
+    
 }

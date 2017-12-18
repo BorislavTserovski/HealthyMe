@@ -109,7 +109,11 @@ namespace HealthyMe.Data.Migrations
 
                     b.Property<double>("Sugars");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Products");
                 });
@@ -367,6 +371,13 @@ namespace HealthyMe.Data.Migrations
                         .WithMany("Diets")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HealthyMe.Data.Models.Product", b =>
+                {
+                    b.HasOne("HealthyMe.Data.Models.User", "User")
+                        .WithMany("MyProducts")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("HealthyMe.Data.Models.UserProduct", b =>

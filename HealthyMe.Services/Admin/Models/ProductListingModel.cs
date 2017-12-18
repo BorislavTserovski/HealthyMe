@@ -33,6 +33,8 @@ namespace HealthyMe.Services.Admin.Models
 
         public byte[] Image { get; set; }
 
+
+
        
         
 

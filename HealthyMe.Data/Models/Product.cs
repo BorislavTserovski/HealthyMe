@@ -33,6 +33,10 @@ namespace HealthyMe.Data.Models
 
         public byte[] Image { get; set; }
 
+        public string UserId { get; set; }
+
+        public User User { get; set; }
+
         public List<DietProduct> Diets { get; set; } = new List<DietProduct>();
 
         public List<UserProduct> Users { get; set; } = new List<UserProduct>();

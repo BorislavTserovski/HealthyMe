@@ -19,6 +19,10 @@ namespace HealthyMe.Web
 
         public const string WriterArea = "Writer";
 
+        public const string TrainerArea = "Trainer";
+
+        public const string TrainerRole = "Trainer";
+
 
     }
 }

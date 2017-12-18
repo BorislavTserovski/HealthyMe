@@ -38,6 +38,8 @@ namespace HealthyMe.Data.Models
 
         public List<UserProduct> Products { get; set; } = new List<UserProduct>();
 
+        public List<Product> MyProducts { get; set; } = new List<Product>();
+
         public List<Diet> Diets { get; set; } = new List<Diet>();
 
         public List<UserTraining> Trainings { get; set; } = new List<UserTraining>();
