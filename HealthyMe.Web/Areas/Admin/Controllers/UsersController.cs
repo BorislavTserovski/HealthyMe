@@ -72,5 +72,28 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id==null)
+            {
+               return NotFound();
+            }
+            var user = await this.userManager.FindByIdAsync(id);
+            if (user==null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult>Destroy(string id)
+        {
+            await this.users.Delete(id);
+
+            return RedirectToAction(nameof(Index));
+
+        }
     }
 }

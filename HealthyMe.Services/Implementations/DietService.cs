@@ -110,5 +110,15 @@ namespace HealthyMe.Services.Implementations
 
         public int Total() => this.db.Diets.Count();
 
+        public bool isUserAuthor(string userId, int dietId)
+        {
+            var diet = this.db.Diets.FirstOrDefault(d => d.Id == dietId);
+            if (userId==null)
+            {
+                return false;
+            }
+
+            return diet.AuthorId == userId;
+        }
     }
 }

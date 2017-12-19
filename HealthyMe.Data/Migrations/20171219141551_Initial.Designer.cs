@@ -12,7 +12,7 @@ using System;
 namespace HealthyMe.Data.Migrations
 {
     [DbContext(typeof(HealthyMeDbContext))]
-    [Migration("20171217190153_Initial")]
+    [Migration("20171219141551_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -351,14 +351,16 @@ namespace HealthyMe.Data.Migrations
                 {
                     b.HasOne("HealthyMe.Data.Models.User", "Author")
                         .WithMany("Articles")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("HealthyMe.Data.Models.Diet", b =>
                 {
                     b.HasOne("HealthyMe.Data.Models.User", "Author")
                         .WithMany("Diets")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HealthyMe.Data.Models.DietProduct", b =>

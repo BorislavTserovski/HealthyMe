@@ -26,6 +26,18 @@ namespace HealthyMe.Services.Admin.Implementations
             .ProjectTo<AdminListingServiceModel>()
             .ToListAsync();
 
+        public async Task Delete(string id)
+        {
+            var user = this.db.Users.Where(u => u.Id == id).FirstOrDefault();
+            if (user==null)
+            {
+                return;
+            }
+             this.db.Users.Remove(user);
+
+            await this.db.SaveChangesAsync();
+        }
+
         public async Task<int> GetUserAllowedCalories(string userId)
         {
             var user = this.db.Users.Where(u => u.Id == userId).FirstOrDefault();

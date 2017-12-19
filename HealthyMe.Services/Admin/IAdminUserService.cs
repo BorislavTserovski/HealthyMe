@@ -16,5 +16,7 @@ namespace HealthyMe.Services.Admin
         Task<int> GetUserAllowedCalories(string userId);
 
         Task SetUserDayToCurrent(string userId);
+
+        Task Delete(string id);
     }
 }

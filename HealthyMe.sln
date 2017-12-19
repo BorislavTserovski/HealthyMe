@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyMe.Web", "HealthyMe.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyMe.Data", "HealthyMe.Data\HealthyMe.Data.csproj", "{4159E7EA-6E07-439B-907B-A3C7095B3EBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyMe.Common", "HealthyMe.Common\HealthyMe.Common.csproj", "{CE4605E4-7ED9-461C-9818-80C1EC1F6381}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyMe.Common", "HealthyMe.Common\HealthyMe.Common.csproj", "{CE4605E4-7ED9-461C-9818-80C1EC1F6381}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyMe.Services", "HealthyMe.Services\HealthyMe.Services.csproj", "{7B660254-3395-4F88-B0FA-3D4E654F42FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyMe.Services", "HealthyMe.Services\HealthyMe.Services.csproj", "{7B660254-3395-4F88-B0FA-3D4E654F42FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyMe.Test", "HealthyMe.Test\HealthyMe.Test.csproj", "{92E5E64C-1B65-448D-A7B2-5E7F160E2D7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7B660254-3395-4F88-B0FA-3D4E654F42FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B660254-3395-4F88-B0FA-3D4E654F42FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B660254-3395-4F88-B0FA-3D4E654F42FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92E5E64C-1B65-448D-A7B2-5E7F160E2D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E5E64C-1B65-448D-A7B2-5E7F160E2D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92E5E64C-1B65-448D-A7B2-5E7F160E2D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92E5E64C-1B65-448D-A7B2-5E7F160E2D7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

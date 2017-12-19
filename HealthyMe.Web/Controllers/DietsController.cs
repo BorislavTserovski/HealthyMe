@@ -58,12 +58,18 @@ namespace HealthyMe.Web.Controllers
             return RedirectToAction(nameof(All));
         }
 
+       
         public IActionResult Details(int id) => View(this.diets.Details(id));
 
         [Authorize]
         public IActionResult Edit(int id)
         {
-           var model =  this.diets.GetById(id);
+            string userId = this.userManager.GetUserId(User);
+            if (!this.diets.isUserAuthor(userId, id) && !User.IsInRole(WebConstants.AdministratorRole))
+            {
+                return Unauthorized();
+            }
+            var model =  this.diets.GetById(id);
             if (model==null)
             {
                 return NotFound();
@@ -75,6 +81,11 @@ namespace HealthyMe.Web.Controllers
         [Authorize]
         public IActionResult Edit(int id, DietFormModel model,  IFormFile file)
         {
+            string userId = this.userManager.GetUserId(User);
+            if (!this.diets.isUserAuthor(userId, id) && !User.IsInRole(WebConstants.AdministratorRole))
+            {
+                return Unauthorized();
+            }
             if (ModelState.IsValid)
             {
                 this.diets.Edit(id, model.Name, model.Description, file);
@@ -87,6 +98,11 @@ namespace HealthyMe.Web.Controllers
         [Authorize]
         public IActionResult Delete(int id)
         {
+            string userId = this.userManager.GetUserId(User);
+            if (!this.diets.isUserAuthor(userId, id)&&!User.IsInRole(WebConstants.AdministratorRole))
+            {
+                return Unauthorized();
+            }
             var model = this.diets.GetById(id);
             if (model == null)
             {
@@ -99,6 +115,11 @@ namespace HealthyMe.Web.Controllers
         [Authorize]
         public IActionResult Destroy(int id)
         {
+            string userId = this.userManager.GetUserId(User);
+            if (!this.diets.isUserAuthor(userId, id) && !User.IsInRole(WebConstants.AdministratorRole))
+            {
+                return Unauthorized();
+            }
             this.diets.Delete(id);
             return RedirectToAction(nameof(All));
         }

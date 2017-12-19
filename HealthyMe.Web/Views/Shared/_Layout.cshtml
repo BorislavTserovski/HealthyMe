@@ -45,6 +45,10 @@
                     {
                         <li><a asp-area="Writer" asp-controller="Articles" asp-action="Create"><span class="navbarText">Publish Article</span></a></li>
                     }
+                    @if (User.IsInRole(WebConstants.TrainerRole))
+                    {
+                        <li><a asp-area="Trainer" asp-controller="Trainings" asp-action="Create"><span class="navbarText">Add Training</span></a></li>
+                    }
 
                   
                 </ul>

@@ -350,14 +350,16 @@ namespace HealthyMe.Data.Migrations
                 {
                     b.HasOne("HealthyMe.Data.Models.User", "Author")
                         .WithMany("Articles")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("HealthyMe.Data.Models.Diet", b =>
                 {
                     b.HasOne("HealthyMe.Data.Models.User", "Author")
                         .WithMany("Diets")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HealthyMe.Data.Models.DietProduct", b =>

@@ -1,0 +1,83 @@
+﻿
+@model HealthyMe.Web.Areas.Trainer.Models.TrainingListingViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h2 class="headerText">All Trainings</h2>
+<p>
+    @if (User.IsInRole(WebConstants.TrainerRole))
+    {
+        <a asp-action="Create" class="btn btn-warning headerText">Create New</a>
+    }
+    
+    <a asp-area="Trainer" asp-controller="Trainings" asp-action="FilterTrainings" asp-route-group="arms" class="btn btn-primary">Hands</a>
+    <a asp-area="Trainer" asp-controller="Trainings" asp-action="FilterTrainings" asp-route-group="abs" class="btn btn-primary">Abs</a>
+    <a asp-area="Trainer" asp-controller="Trainings" asp-action="FilterTrainings" asp-route-group="legs" class="btn btn-primary">Legs</a>
+    <a asp-area="Trainer" asp-controller="Trainings" asp-action="Index"  class="btn btn-primary">All</a>
+    
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="headerText">
+                Name
+            </th>
+
+            <th class="headerText">
+                Description
+            </th>
+            <th class="headerText">
+                Video
+            </th>
+            <th class="headerText">
+                Is For Loosing Weight
+            </th>
+            <th class="headerText">
+                Is For Gaining Weight
+            </th>
+            <th class="headerText">
+                Muscle Group
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Trainings)
+        {
+            <tr>
+                <td class="tdClass">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td class="tdClass">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a href="@item.VideoUrl" class="btn btn-primary">Video</a>
+                </td>
+                <td class="tdClass">
+                    @Html.DisplayFor(modelItem => item.IsForLoosingWeight)
+                </td>
+                <td class="tdClass">
+                    @Html.DisplayFor(modelItem => item.IsForGainingWeight)
+                </td>
+
+
+                <td class="tdClass">
+                    @Html.DisplayFor(modelItem => item.MuscleGroup)
+                </td>
+                <td>
+
+                    @if (User.IsInRole(WebConstants.TrainerRole))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

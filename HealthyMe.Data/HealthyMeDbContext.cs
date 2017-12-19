@@ -48,12 +48,14 @@ namespace HealthyMe.Data
             builder.Entity<Article>()
                 .HasOne(a => a.Author)
                 .WithMany(au => au.Articles)
-                .HasForeignKey(a => a.AuthorId);
+                .HasForeignKey(a => a.AuthorId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Diet>()
                 .HasOne(d => d.Author)
                 .WithMany(a => a.Diets)
-                .HasForeignKey(d => d.AuthorId);
+                .HasForeignKey(d => d.AuthorId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<UserProduct>()
                 .HasKey(up => new { up.UserId, up.ProductId });

@@ -18,6 +18,11 @@
                     <a href="@article" data-toggle="collapse" class="btn btn-info"><span class="headerText">@Model.Articles.ElementAt(i).Title</span></a>
                     
                     <small style="margin:5px">  published by @Model.Articles.ElementAt(i).Author on @Model.Articles.ElementAt(i).PublishDate.ToShortDateString()</small>
+
+                    @if (User.IsInRole(WebConstants.WriterRole))
+                    {
+                        <a asp-area="Writer" asp-controller="Articles" asp-action="Delete" asp-route-id="@Model.Articles.ElementAt(i).Id" class="btn btn-danger"><span class="headerText">Delete</span></a>
+                    }
                 </div>
                 <div id="@id" class="collapse">
                     <div>

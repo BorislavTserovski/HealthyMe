@@ -1,4 +1,5 @@
-﻿using HealthyMe.Services.Writer.Models;
+﻿using HealthyMe.Services.Models;
+using HealthyMe.Services.Writer.Models;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,9 @@ namespace HealthyMe.Services.Writer
         Task<int> TotalAsync();
 
         Task<WriterArticleDetailsServiceModel> ById(int id);
+
+        Task Delete(int id);
+
+        Task<ArticleDeleteModel> GetArticleById(int id);
     }
 }

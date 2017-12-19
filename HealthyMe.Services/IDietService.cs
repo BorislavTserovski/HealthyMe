@@ -21,5 +21,7 @@ namespace HealthyMe.Services
         DietFormModel GetById(int id);
 
         int Total();
+
+        bool isUserAuthor(string userId, int dietId);
     }
 }

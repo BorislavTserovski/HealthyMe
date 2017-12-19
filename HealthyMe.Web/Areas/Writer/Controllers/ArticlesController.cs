@@ -59,5 +59,24 @@ namespace HealthyMe.Web.Areas.Writer.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+
+        public async Task<IActionResult>Delete(int id)
+        {
+            var article = await this.articles.GetArticleById(id);
+
+            if (article==null)
+            {
+                return NotFound();
+            }
+            return View(article);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult>Destroy(int id)
+        {
+            await this.articles.Delete(id);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper.QueryableExtensions;
 using HealthyMe.Data;
 using HealthyMe.Data.Models;
+using HealthyMe.Services.Models;
 using HealthyMe.Services.Writer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -60,8 +61,24 @@ namespace HealthyMe.Services.Writer.Implementations
             await this.db.SaveChangesAsync();
         }
 
+        public async Task Delete(int id)
+        {
+            var article = this.db.Articles.FirstOrDefault(a => a.Id == id);
+            if (article==null)
+            {
+                return;
+            }
+            this.db.Remove(article);
+            await this.db.SaveChangesAsync();
+        }
+
         public async Task<int> TotalAsync()
         => await this.db.Articles.CountAsync();
+
+        public async Task<ArticleDeleteModel> GetArticleById(int id)
+      => await this.db.Articles.Where(a => a.Id == id)
+            .ProjectTo<ArticleDeleteModel>()
+            .FirstOrDefaultAsync();
 
 
     }
