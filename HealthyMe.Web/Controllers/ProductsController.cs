@@ -81,8 +81,19 @@ namespace HealthyMe.Web.Controllers
         public async Task<IActionResult>ViewMyProducts()
         {
             string userId = this.users.GetUserId(User);
-
+            var user = this.adminUserService.GetUserById(userId);
             var userWithProducts = await this.userService.MyProducts(userId);
+            if (user.Day == null)
+            {
+                await this.adminUserService.SetUserDayToCurrent(userId);
+                user.AllowedCalories = await this.adminUserService.GetUserAllowedCalories(userId);
+            }
+            if (user.Day != DateTime.Today)
+            {
+                await this.adminUserService.SetUserDayToCurrent(userId);
+                return await this.ClearList();
+            }
+
 
             return View(userWithProducts);
 

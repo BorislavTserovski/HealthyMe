@@ -9,6 +9,7 @@
 @if (Model.AllowedCalories >= 0)
 {
     <h1 class="headerText">@Model.Name  - You Have <span class="numbersFont">@Model.AllowedCalories</span>  KCal Left For Today!</h1>
+    <h1 class="headerText">Your calories count for today is <span class="numbersFont">@Model.Products.Sum(p=>p.Energy)</span> so far.</h1>
 }
 else
 {
@@ -34,7 +35,7 @@ else
             <th class="headerText">
                 Picture
             </th>
-            <th class="headerText">Total Calories</th>
+           
             
         </tr>
     </thead>
@@ -54,19 +55,12 @@ else
                         <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" class="imageResize" style="max-width:250px;max-height:300px;" />
                     }
                 </td>
-                <td></td>
+               
 
                 
             </tr>
         }
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                @Model.Products.Sum(p=>p.Energy)
-            </td>
-        </tr>
+      
     </tbody>
 </table>
 

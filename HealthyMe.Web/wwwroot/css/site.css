@@ -79,8 +79,13 @@ body {
 
 .headerText {
     font-family: 'Comic Sans MS';
+   
 }
 
+.tdClass {
+    font-family: 'Comic Sans MS';
+    color: #ffccff;
+}
 
 .imageResize {
     max-width: 250px;
@@ -171,4 +176,24 @@ body {
 .dropdownItem {
     background-color: #cc99ff;
     
+}
+.logo{
+    max-height:45px;
+    max-width:45px;
+}
+.navbarText {
+    font-family: 'Comic Sans MS';
+    font: larger;
+    color: white;
+    font-size: 16px;
+    max-width: 160px;
+    position: relative;
+    text-transform: uppercase;
+}
+    .navbarText:hover {
+        color: #00ccff;
+        transition: ease-in .3s;
+    }
+.navbarText-brand {
+    font-size: 25px;
 }

@@ -19,7 +19,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#ff4dc4;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -28,7 +28,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><span class="headerText">Healthy Me</span></a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="pull-left"><img src="http://healthymas.org/wp-content/uploads/2015/09/cropped-HealthyMasManLogo.png" class="logo"></a> 
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><span class="navbarText">Healthy Me</span></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -36,13 +37,13 @@
                     
                     @if (User.IsInRole(WebConstants.AdministratorRole))
                     {
-                        <li><a asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a></li>
-                        <li><a asp-area="Admin" asp-controller="Products" asp-action="Create">Create a Product</a></li>
+                        <li><a asp-area="Admin" asp-controller="Users" asp-action="Index"><span class="navbarText">Users</span></a></li>
+                        <li><a asp-area="Admin" asp-controller="Products" asp-action="Create"><span class="navbarText">Create a Product</span></a></li>
                        
                     }
                     @if (User.IsInRole(WebConstants.WriterRole))
                     {
-                        <li><a asp-area="Writer" asp-controller="Articles" asp-action="Create">Publish Article</a></li>
+                        <li><a asp-area="Writer" asp-controller="Articles" asp-action="Create"><span class="navbarText">Publish Article</span></a></li>
                     }
 
                   

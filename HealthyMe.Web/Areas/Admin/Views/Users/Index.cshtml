@@ -27,13 +27,13 @@
         @foreach (var user in Model.Users)
         {
             <tr>
-                <th>
+                <td>
                     @user.Username
-                </th>
-                <th>
+                </td>
+                <td>
                     @user.Email
-                </th>
-                <th>
+                </td>
+                <td>
 
                     <form asp-controller="Users" asp-action="AddToRole" method="post">
                         <div class="row">
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </form>
-                </th>
+                </td>
             </tr>
         }
     </tbody>
