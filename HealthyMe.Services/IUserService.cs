@@ -11,5 +11,7 @@ namespace HealthyMe.Services
         Task<UserWithProductsServiceModel> MyProducts(string userId);
 
         Task ClearFoodAndDrinksList(string userId);
+
+        Task SendMessage(string userId, string content);
     }
 }

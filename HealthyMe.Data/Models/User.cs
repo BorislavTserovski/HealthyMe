@@ -44,6 +44,8 @@ namespace HealthyMe.Data.Models
 
         public List<UserTraining> Trainings { get; set; } = new List<UserTraining>();
 
+        public List<Message> Messages { get; set; } = new List<Message>();
+
 
 
     }

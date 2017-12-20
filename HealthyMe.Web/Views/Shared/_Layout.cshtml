@@ -39,7 +39,7 @@
                     {
                         <li><a asp-area="Admin" asp-controller="Users" asp-action="Index"><span class="navbarText">Users</span></a></li>
                         <li><a asp-area="Admin" asp-controller="Products" asp-action="Create"><span class="navbarText">Create a Product</span></a></li>
-                       
+                        <li><a asp-area="Admin" asp-controller="Messages" asp-action="Index"><span class="navbarText">Read Messages</span></a></li>
                     }
                     @if (User.IsInRole(WebConstants.WriterRole))
                     {

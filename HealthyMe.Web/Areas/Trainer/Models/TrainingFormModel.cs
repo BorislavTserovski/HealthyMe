@@ -18,6 +18,7 @@ namespace HealthyMe.Web.Areas.Trainer.Models
         [MinLength(5)]
         public string Description { get; set; }
 
+        [RegularExpression("^https(.)+", ErrorMessage = "The video url must start with \"https\"")]
         public string VideoUrl { get; set; }
 
         public bool IsForLoosingWeight { get; set; }

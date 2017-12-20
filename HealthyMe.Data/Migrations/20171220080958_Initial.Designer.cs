@@ -12,7 +12,7 @@ using System;
 namespace HealthyMe.Data.Migrations
 {
     [DbContext(typeof(HealthyMeDbContext))]
-    [Migration("20171219141551_Initial")]
+    [Migration("20171220080958_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,6 +85,23 @@ namespace HealthyMe.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("DietWithProducts");
+                });
+
+            modelBuilder.Entity("HealthyMe.Data.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content")
+                        .IsRequired();
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("HealthyMe.Data.Models.Product", b =>
@@ -374,6 +391,13 @@ namespace HealthyMe.Data.Migrations
                         .WithMany("Diets")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HealthyMe.Data.Models.Message", b =>
+                {
+                    b.HasOne("HealthyMe.Data.Models.User", "User")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("HealthyMe.Data.Models.Product", b =>

@@ -1,12 +1,13 @@
-﻿@{
+﻿@model HealthyMe.Web.Models.MessageFormModel
+@{
     ViewData["Title"] = "Contact us";
-    ViewData["Message"] = "We are always here for you!";
+   
 }
 <br />
 <h2 class="headerText">@ViewData["Title"]</h2>
-<h3 class="headerText">@ViewData["Message"]</h3>
-<h1 class="headerText">Where we are?</h1>
 
+<h1 class="headerText">Where we are?</h1>
+<hr />
 <div class="row">
 
 
@@ -27,15 +28,28 @@
     </script>
 
 
-    <address class="col-md-4">
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
+    
+        <div class=" row col-md-6 pull-right">
+            <form method="post" >
+                <h4 class="headerText">Send Us Feedback.</h4>
+                <hr />
 
-    <address class="col-md-4">
-        <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
+              
+                <div class="form-group">
+                    
+                    <textarea asp-for="Content" class="form-control notes" style="width:100%" rows="15"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+               
+
+                <input type="submit"  asp-area="" asp-controller="Account" asp-action="SendMessage" class="btn btn-primary headerText" value="Send"/>
+            </form>
+        </div>
+   
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+
+
 </div>

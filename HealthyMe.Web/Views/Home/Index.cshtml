@@ -51,7 +51,7 @@
         <p>
             @using (Html.BeginForm("Index", "Home", FormMethod.Get))
             {
-                <b class="headerText">Search by: </b>@Html.RadioButton("SearchBy", "Name", true) <span class="headerText">Name</span>
+                <b class="headerText">Search in products by: </b>@Html.RadioButton("SearchBy", "Name", true) <span class="headerText">Name</span>
 
 
                 @Html.RadioButton("SearchBy", "Category") <span class="headerText">Category</span><br />

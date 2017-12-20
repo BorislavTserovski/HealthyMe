@@ -15,6 +15,9 @@ using HealthyMe.Web.Models.AccountViewModels;
 
 using HealthyMe.Data.Models;
 using HealthyMe.Services.Admin;
+using HealthyMe.Services;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using HealthyMe.Web.Infrastructure.Extensions;
 
 namespace HealthyMe.Web.Controllers
 {
@@ -24,18 +27,19 @@ namespace HealthyMe.Web.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IUserService users;
        
         private readonly ILogger _logger;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-          
+            IUserService users,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-           
+            this.users = users;
             _logger = logger;
         }
 
@@ -441,6 +445,21 @@ namespace HealthyMe.Web.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+        
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult>SendMessage(MessageFormModel messageModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+            var userId = this._userManager.GetUserId(User);
+            await this.users.SendMessage(userId, messageModel.Content);
+            TempData.AddSuccessMessage($"Successfully send message");
+            return RedirectToAction(nameof(Index), "Home");
         }
 
         #region Helpers

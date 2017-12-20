@@ -7,6 +7,7 @@ using HealthyMe.Data;
 using System.Linq;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using HealthyMe.Data.Models;
 
 namespace HealthyMe.Services.Implementations
 {
@@ -38,9 +39,22 @@ namespace HealthyMe.Services.Implementations
             .Where(u => u.Id == userId)
             .ProjectTo<UserWithProductsServiceModel>()
             .FirstOrDefaultAsync();
-            
 
-            
-            
+        public async Task SendMessage(string userId, string content)
+        {
+            Message message = new Message
+            {
+                Content = content,
+                UserId = userId
+            };
+
+            if (message==null)
+            {
+                return;
+            }
+
+            this.db.Add(message);
+            await this.db.SaveChangesAsync();
+        }
     }
 }

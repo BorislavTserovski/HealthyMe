@@ -24,6 +24,8 @@ namespace HealthyMe.Data
 
         public DbSet<UserTraining> UsersWithTrainings { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
         public HealthyMeDbContext(DbContextOptions<HealthyMeDbContext> options)
             : base(options)
         {
@@ -87,6 +89,11 @@ namespace HealthyMe.Data
                 .HasMany(u => u.MyProducts)
                 .WithOne(mp => mp.User)
                 .HasForeignKey(mp => mp.UserId);
+
+            builder.Entity<Message>()
+                .HasOne(m => m.User)
+                .WithMany(u => u.Messages)
+                .HasForeignKey(m => m.UserId);
             
             base.OnModelCreating(builder);
         }
