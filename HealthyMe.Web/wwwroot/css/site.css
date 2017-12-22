@@ -1,5 +1,4 @@
-﻿
-body {
+﻿body {
     background: url('https://i.imgur.com/Nbi7bYI.jpg') no-repeat center center fixed;
     background-size: cover;
     padding-top: 50px;
@@ -36,7 +35,6 @@ body {
         display: none;
     }
 }
-
 
 .button {
     border-radius: 8px;
@@ -79,7 +77,6 @@ body {
 
 .headerText {
     font-family: 'Comic Sans MS';
-   
 }
 
 .tdClass {
@@ -99,8 +96,6 @@ body {
 .previous {
     background-color: #f1f1f1;
     color: black;
-
-   
 }
      .previous:hover{
     color:yellow;
@@ -108,7 +103,6 @@ body {
 .next {
     background-color: #4CAF50;
     color: white;
-    
 }
     .next:hover{
         color:blue;
@@ -126,7 +120,6 @@ body {
     transition: all 0.5s;
     cursor: pointer;
     margin: 10px;
-
 }
 
     .menuButton span {
@@ -159,7 +152,6 @@ body {
     color:blueviolet;
     margin:20px;
     font-size:21px;
-    
 }
     .menuListItem:hover {
         color:#404040;
@@ -175,7 +167,6 @@ body {
 
 .dropdownItem {
     background-color: #cc99ff;
-    
 }
 .logo{
     max-height:45px;

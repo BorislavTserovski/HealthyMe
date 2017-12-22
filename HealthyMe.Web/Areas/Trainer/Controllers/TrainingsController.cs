@@ -2,9 +2,6 @@
 using HealthyMe.Web.Areas.Trainer.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HealthyMe.Web.Areas.Trainer.Controllers
@@ -13,7 +10,6 @@ namespace HealthyMe.Web.Areas.Trainer.Controllers
     [Authorize(Roles = WebConstants.TrainerRole)]
     public class TrainingsController : Controller
     {
-
         private readonly ITrainingsService trainings;
 
         public TrainingsController(ITrainingsService trainings)
@@ -22,13 +18,12 @@ namespace HealthyMe.Web.Areas.Trainer.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult>Index(int page = 1)
+        public async Task<IActionResult> Index(int page = 1)
         => View(new TrainingListingViewModel
         {
             Trainings = await this.trainings.AllAsync(page),
             TotalTrainings = await this.trainings.TotalAsync(),
             CurrentPage = page
-
         });
 
         public IActionResult Create()
@@ -44,18 +39,17 @@ namespace HealthyMe.Web.Areas.Trainer.Controllers
                 return View(trainingModel);
             }
 
-           await this.trainings.Create(trainingModel.Name, trainingModel.Description, trainingModel.VideoUrl,
-                trainingModel.IsForLoosingWeight, trainingModel.IsForGainingWeight, trainingModel.MuscleGroup);
+            await this.trainings.Create(trainingModel.Name, trainingModel.Description, trainingModel.VideoUrl,
+                 trainingModel.IsForLoosingWeight, trainingModel.IsForGainingWeight, trainingModel.MuscleGroup);
 
             return RedirectToAction(nameof(Index));
         }
-        
-        public async Task<IActionResult>Delete(int id)
-        {
-           
-            var training =await this.trainings.GetTrainingById(id);
 
-            if (training==null)
+        public async Task<IActionResult> Delete(int id)
+        {
+            var training = await this.trainings.GetTrainingById(id);
+
+            if (training == null)
             {
                 return NotFound();
             }
@@ -63,7 +57,7 @@ namespace HealthyMe.Web.Areas.Trainer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Destroy(int  id)
+        public async Task<IActionResult> Destroy(int id)
         {
             await this.trainings.Delete(id);
 
@@ -75,8 +69,6 @@ namespace HealthyMe.Web.Areas.Trainer.Controllers
        => View(new TrainingListingViewModel
        {
            Trainings = await this.trainings.GetFilteredTrainings(group)
-         
        });
-
     }
 }

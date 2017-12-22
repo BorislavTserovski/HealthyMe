@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using HealthyMe.Services.Admin;
+﻿using HealthyMe.Services.Admin;
 using HealthyMe.Web.Areas.Admin.Models.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HealthyMe.Web.Areas.Admin.Controllers
 {
@@ -18,22 +18,18 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
             this.products = products;
         }
 
-        
         public async Task<IActionResult> Index(int page = 1)
          => View(new ProductListingViewModel
          {
              Products = await this.products.AllAsync(page),
              TotalProducts = await this.products.TotalAsync(),
              CurrentPage = page
-
          });
-
 
         public IActionResult Create()
         {
             return View();
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create(ProductFormModel model, IFormFile file)
@@ -41,7 +37,6 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
             if (!ModelState.IsValid)
             {
                 return View(model);
-               
             }
             await this.products.Create(model.Name, model.Category, model.Energy, model.Fat
                 , model.Protein, model.Sugars, file);
@@ -49,20 +44,16 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
         public async Task<IActionResult> Delete(int id)
         {
-           
             var product = await this.products.GetByIdAsync(id);
-            if (product==null)
+            if (product == null)
             {
                 return NotFound();
             }
-            
+
             return View(product);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Destroy(int id)
@@ -71,7 +62,5 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-
     }
 }

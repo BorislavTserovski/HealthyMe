@@ -1,7 +1,5 @@
 ﻿using HealthyMe.Services.Admin.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthyMe.Services.Admin
@@ -12,6 +10,6 @@ namespace HealthyMe.Services.Admin
 
         Task Delete(int id);
 
-        Task <MessagesListingModel> GetById(int id);
+        Task<MessagesListingModel> GetById(int id);
     }
 }

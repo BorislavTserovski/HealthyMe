@@ -6,9 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HealthyMe.Web.Areas.Writer.Controllers
@@ -35,12 +32,7 @@ namespace HealthyMe.Web.Areas.Writer.Controllers
             Articles = await this.articles.AllAsync(page),
             TotalArticles = await this.articles.TotalAsync(),
             CurrentPage = page
-
         });
-
-     
-
-
 
         public IActionResult Create() => View();
 
@@ -57,14 +49,13 @@ namespace HealthyMe.Web.Areas.Writer.Controllers
             await this.articles.CreateAsync(model.Title, model.Content, userId, file);
 
             return RedirectToAction(nameof(Index));
-
         }
 
-        public async Task<IActionResult>Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var article = await this.articles.GetArticleById(id);
 
-            if (article==null)
+            if (article == null)
             {
                 return NotFound();
             }
@@ -72,7 +63,7 @@ namespace HealthyMe.Web.Areas.Writer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult>Destroy(int id)
+        public async Task<IActionResult> Destroy(int id)
         {
             await this.articles.Delete(id);
 

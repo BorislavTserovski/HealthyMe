@@ -4,9 +4,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HealthyMe.Web.Infrastructure.Extensions
@@ -34,7 +31,6 @@ namespace HealthyMe.Web.Infrastructure.Extensions
                              WebConstants.WriterRole,
 
                              WebConstants.TrainerRole
-
                         };
 
                         foreach (var role in roles)
@@ -49,8 +45,6 @@ namespace HealthyMe.Web.Infrastructure.Extensions
                                 });
                             }
                         }
-
-
 
                         var adminEmail = "admin@admin.com";
 
@@ -67,7 +61,6 @@ namespace HealthyMe.Web.Infrastructure.Extensions
                                 Weight = 87,
                                 Height = 191,
                                 Gender = Gender.male
-                                
                             };
 
                             await userManager.CreateAsync(adminUser, "admin123");

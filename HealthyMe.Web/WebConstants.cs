@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HealthyMe.Web
+﻿namespace HealthyMe.Web
 {
     public class WebConstants
     {
@@ -22,7 +17,5 @@ namespace HealthyMe.Web
         public const string TrainerArea = "Trainer";
 
         public const string TrainerRole = "Trainer";
-
-
     }
 }

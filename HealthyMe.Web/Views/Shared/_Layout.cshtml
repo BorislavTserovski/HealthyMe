@@ -1,6 +1,4 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -28,13 +26,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="pull-left"><img src="http://healthymas.org/wp-content/uploads/2015/09/cropped-HealthyMasManLogo.png" class="logo"></a> 
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="pull-left"><img src="http://healthymas.org/wp-content/uploads/2015/09/cropped-HealthyMasManLogo.png" class="logo"></a>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><span class="navbarText">Healthy Me</span></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                   
-                    
+
                     @if (User.IsInRole(WebConstants.AdministratorRole))
                     {
                         <li><a asp-area="Admin" asp-controller="Users" asp-action="Index"><span class="navbarText">Users</span></a></li>
@@ -49,8 +46,6 @@
                     {
                         <li><a asp-area="Trainer" asp-controller="Trainings" asp-action="Create"><span class="navbarText">Add Training</span></a></li>
                     }
-
-                  
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -64,8 +59,6 @@
             </div>
         }
         @RenderBody()
-        
-    
     </div>
 
     <environment include="Development">

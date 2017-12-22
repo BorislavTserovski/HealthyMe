@@ -1,8 +1,6 @@
 ﻿using HealthyMe.Data.Models;
 using HealthyMe.Services.Trainer.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthyMe.Services.Trainer
@@ -21,7 +19,5 @@ namespace HealthyMe.Services.Trainer
         Task<TrainingDeleteModel> GetTrainingById(int id);
 
         Task<IEnumerable<TrainingListingServiceModel>> GetFilteredTrainings(string group);
-
-      
     }
 }

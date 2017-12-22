@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using HealthyMe.Services.Admin.Models;
+﻿using AutoMapper.QueryableExtensions;
 using HealthyMe.Data;
-using AutoMapper.QueryableExtensions;
+using HealthyMe.Services.Admin.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HealthyMe.Services.Admin.Implementations
 {
@@ -18,6 +16,7 @@ namespace HealthyMe.Services.Admin.Implementations
         {
             this.db = db;
         }
+
         public async Task<IEnumerable<MessagesListingModel>> AllAsync()
         => await this.db
             .Messages
@@ -37,6 +36,5 @@ namespace HealthyMe.Services.Admin.Implementations
        => await this.db.Messages.Where(m => m.Id == id)
             .ProjectTo<MessagesListingModel>()
             .FirstOrDefaultAsync();
-
     }
 }

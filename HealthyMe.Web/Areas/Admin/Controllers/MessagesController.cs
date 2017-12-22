@@ -2,9 +2,6 @@
 using HealthyMe.Web.Areas.Admin.Models.Messages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HealthyMe.Web.Areas.Admin.Controllers
@@ -22,9 +19,9 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         => View(new MessagesListingViewModel
-            {
-                Messages = await this.messages.AllAsync(),
-            });
+        {
+            Messages = await this.messages.AllAsync(),
+        });
 
         public async Task<IActionResult> Delete(int id)
         {
@@ -33,12 +30,11 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
             return View(message);
         }
 
-        public async Task<IActionResult>Destroy(int id)
+        public async Task<IActionResult> Destroy(int id)
         {
             await this.messages.Delete(id);
 
             return RedirectToAction(nameof(Index));
         }
-        
     }
 }

@@ -1,6 +1,5 @@
 ﻿// Write your JavaScript code.
 (function () {
-
     var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
 
     // Main
@@ -184,10 +183,4 @@
     function getDistance(p1, p2) {
         return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
     }
-
 })();
-
-
-
-
-

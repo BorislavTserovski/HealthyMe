@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using HealthyMe.Data.Models;
+﻿using HealthyMe.Data.Models;
 using HealthyMe.Services;
-using HealthyMe.Services.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authorization;
 using HealthyMe.Services.Html;
+using HealthyMe.Services.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HealthyMe.Web.Controllers
 {
@@ -42,7 +38,6 @@ namespace HealthyMe.Web.Controllers
         public IActionResult Create()
         => View();
 
-       
         [HttpPost]
         [Authorize]
         public IActionResult Create(DietFormModel dietModel, IFormFile file)
@@ -58,7 +53,6 @@ namespace HealthyMe.Web.Controllers
             return RedirectToAction(nameof(All));
         }
 
-       
         public IActionResult Details(int id) => View(this.diets.Details(id));
 
         [Authorize]
@@ -69,8 +63,8 @@ namespace HealthyMe.Web.Controllers
             {
                 return Unauthorized();
             }
-            var model =  this.diets.GetById(id);
-            if (model==null)
+            var model = this.diets.GetById(id);
+            if (model == null)
             {
                 return NotFound();
             }
@@ -79,7 +73,7 @@ namespace HealthyMe.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Edit(int id, DietFormModel model,  IFormFile file)
+        public IActionResult Edit(int id, DietFormModel model, IFormFile file)
         {
             string userId = this.userManager.GetUserId(User);
             if (!this.diets.isUserAuthor(userId, id) && !User.IsInRole(WebConstants.AdministratorRole))
@@ -92,14 +86,13 @@ namespace HealthyMe.Web.Controllers
                 return RedirectToAction(nameof(All));
             }
             return View(model);
-           
         }
 
         [Authorize]
         public IActionResult Delete(int id)
         {
             string userId = this.userManager.GetUserId(User);
-            if (!this.diets.isUserAuthor(userId, id)&&!User.IsInRole(WebConstants.AdministratorRole))
+            if (!this.diets.isUserAuthor(userId, id) && !User.IsInRole(WebConstants.AdministratorRole))
             {
                 return Unauthorized();
             }
@@ -123,6 +116,5 @@ namespace HealthyMe.Web.Controllers
             this.diets.Delete(id);
             return RedirectToAction(nameof(All));
         }
-
     }
 }

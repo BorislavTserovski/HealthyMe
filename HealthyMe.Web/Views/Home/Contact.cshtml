@@ -1,17 +1,17 @@
 ﻿@model HealthyMe.Web.Models.MessageFormModel
 @{
     ViewData["Title"] = "Contact us";
-   
+
 }
 <br />
 <h2 class="headerText">@ViewData["Title"]</h2>
 
 <h1 class="headerText">Where we are?</h1>
+<h3>Call Us at +359888-88-88-88</h3>
 <hr />
 <div class="row">
 
-
-    <div class="col-md-4" id="map" style="width:400px;height:400px;background:yellow"></div>
+    <div class="col-md-4" id="map" style="width:500px;height:600px;background:yellow"></div>
 
     <script>
         function myMap() {
@@ -27,29 +27,22 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQLQ2ao6VmYji2Xd41aTF3_l2IzqkpYmI&callback=myMap">
     </script>
 
-
-    
         <div class=" row col-md-6 pull-right">
-            <form method="post" >
+            <form method="post">
                 <h4 class="headerText">Send Us Feedback.</h4>
                 <hr />
 
-              
                 <div class="form-group">
-                    
+
                     <textarea asp-for="Content" class="form-control notes" style="width:100%" rows="15"></textarea>
                     <span asp-validation-for="Content" class="text-danger"></span>
                 </div>
-               
 
-                <input type="submit"  asp-area="" asp-controller="Account" asp-action="SendMessage" class="btn btn-primary headerText" value="Send"/>
+                <input type="submit"  asp-area="" asp-controller="Account" asp-action="SendMessage" class="btn btn-primary headerText" value="Send" />
             </form>
         </div>
-   
 
     @section Scripts {
         @await Html.PartialAsync("_ValidationScriptsPartial")
     }
-
-
 </div>

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using HealthyMe.Data.Models;
+﻿using AutoMapper.QueryableExtensions;
 using HealthyMe.Data;
+using HealthyMe.Data.Models;
 using HealthyMe.Services.Trainer.Models;
-using System.Linq;
-using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HealthyMe.Services.Trainer.Implementations
 {
@@ -20,7 +18,6 @@ namespace HealthyMe.Services.Trainer.Implementations
             this.db = db;
         }
 
-       
         public async Task<IEnumerable<TrainingListingServiceModel>> AllAsync(int page = 1)
         => await this.db.Trainings
             .OrderBy(t => t.Id)
@@ -58,17 +55,15 @@ namespace HealthyMe.Services.Trainer.Implementations
 
         public async Task<IEnumerable<TrainingListingServiceModel>> GetFilteredTrainings(string group)
        => await this.db.Trainings
-            .Where(t=>t.MuscleGroup.ToString()==group)
+            .Where(t => t.MuscleGroup.ToString() == group)
             .OrderBy(t => t.Id)
             .ProjectTo<TrainingListingServiceModel>()
             .ToListAsync();
 
         public async Task<TrainingDeleteModel> GetTrainingById(int id)
-        =>  await this.db.Trainings.Where(t => t.Id == id)
+        => await this.db.Trainings.Where(t => t.Id == id)
             .ProjectTo<TrainingDeleteModel>()
             .FirstOrDefaultAsync();
-
-      
 
         public async Task<int> TotalAsync()
         => await this.db.Trainings.CountAsync();

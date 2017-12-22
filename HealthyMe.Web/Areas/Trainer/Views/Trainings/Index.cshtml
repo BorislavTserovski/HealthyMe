@@ -1,5 +1,4 @@
-﻿
- @model HealthyMe.Web.Areas.Trainer.Models.TrainingListingViewModel
+﻿ @model HealthyMe.Web.Areas.Trainer.Models.TrainingListingViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +12,6 @@
     <a asp-area="Trainer" asp-controller="Trainings" asp-action="FilterTrainings"asp-route-group="arms" class="btn btn-primary">Arms</a>
     <a asp-area="Trainer" asp-controller="Trainings" asp-action="FilterTrainings"asp-route-group="abs" class="btn btn-primary">Abs</a>
     <a asp-area="Trainer" asp-controller="Trainings" asp-action="FilterTrainings"asp-route-group="legs" class="btn btn-primary">Legs</a>
-   
 </p>
 
 <table class="table">
@@ -38,7 +36,7 @@
             <th class="headerText">
                 Muscle Group
             </th>
-            
+
             <th></th>
         </tr>
     </thead>
@@ -53,7 +51,7 @@
                 <td class="tdClass">
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td >
+                <td>
                     <a href="@item.VideoUrl" class="btn btn-primary" >Video</a>
                 </td>
                 <td class="tdClass">
@@ -62,7 +60,6 @@
                 <td class="tdClass">
                     @Html.DisplayFor(modelItem => item.IsForGainingWeight)
                 </td>
-               
 
                 <td class="tdClass">
                     @Html.DisplayFor(modelItem => item.MuscleGroup)
@@ -72,7 +69,6 @@
                     {
                         <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                     }
-                    
                 </td>
             </tr>
         }

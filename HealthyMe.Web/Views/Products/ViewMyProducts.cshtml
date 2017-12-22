@@ -1,7 +1,4 @@
-﻿
-
-
-@model UserWithProductsServiceModel
+﻿@model UserWithProductsServiceModel
 @{
     ViewData["Title"] = "All My Products";
 }
@@ -16,12 +13,10 @@ else
     <h1 class="headerText">@Model.Name  - You Have Exceeded Your Daily Calories By <span class="numbersFont">@Math.Abs(Model.AllowedCalories)</span> KCal</h1>
 }
 
-
 <h2 class="headerText">@ViewData["Title"]</h2>
 
 <a asp-area="" asp-controller="Products" asp-action="Index" class="btn btn-primary headerText">Add more</a>
 <a class="btn btn-danger" asp-area="" asp-controller="Products" asp-action="ClearList">Clear</a>
-
 
 <table class="table table-bordered">
     <thead>
@@ -35,8 +30,6 @@ else
             <th class="headerText">
                 Picture
             </th>
-           
-            
         </tr>
     </thead>
     <tbody>
@@ -55,20 +48,7 @@ else
                         <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" class="imageResize" style="max-width:250px;max-height:300px;" />
                     }
                 </td>
-               
-
-                
             </tr>
         }
-      
     </tbody>
 </table>
-
-
-
-
-
-
-
-
-

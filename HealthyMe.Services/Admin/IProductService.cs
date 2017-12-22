@@ -2,11 +2,8 @@
 using HealthyMe.Services.Admin.Models;
 using HealthyMe.Web.Areas.Admin.Models.Products;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-
 
 namespace HealthyMe.Services.Admin
 {
@@ -19,7 +16,7 @@ namespace HealthyMe.Services.Admin
 
         Task Delete(int id);
 
-        Task <ProductViewModel> GetByIdAsync(int id);
+        Task<ProductViewModel> GetByIdAsync(int id);
 
         Task<IEnumerable<ProductListingModel>> Search(string SearchBy, string searchTerm);
 

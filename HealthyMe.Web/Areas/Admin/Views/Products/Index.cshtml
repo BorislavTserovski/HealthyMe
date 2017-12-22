@@ -15,7 +15,7 @@
                 <th class="headerText">
                     Name
                 </th>
-              
+
                 <th class="headerText">
                    Energy KCal
                 </th>
@@ -43,7 +43,7 @@
             <td class="tdClass">
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-          
+
             <td class="tdClass">
                 @Html.DisplayFor(modelItem => item.Energy)
             </td>
@@ -67,7 +67,7 @@
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
-                
+
                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
             </td>
         </tr>
@@ -89,4 +89,3 @@
         </li>
     </ul>
 }
-

@@ -1,13 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace HealthyMe.Data.Models
 {
-   
     public class User : IdentityUser
     {
         [Required]
@@ -45,8 +42,5 @@ namespace HealthyMe.Data.Models
         public List<UserTraining> Trainings { get; set; } = new List<UserTraining>();
 
         public List<Message> Messages { get; set; } = new List<Message>();
-
-
-
     }
 }

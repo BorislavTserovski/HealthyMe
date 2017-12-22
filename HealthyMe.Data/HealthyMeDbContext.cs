@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HealthyMe.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using HealthyMe.Data.Models;
 
 namespace HealthyMe.Data
 {
@@ -45,7 +41,6 @@ namespace HealthyMe.Data
                 .HasOne(dp => dp.Diet)
                 .WithMany(d => d.Products)
                 .HasForeignKey(dp => dp.DietId);
-
 
             builder.Entity<Article>()
                 .HasOne(a => a.Author)
@@ -94,7 +89,7 @@ namespace HealthyMe.Data
                 .HasOne(m => m.User)
                 .WithMany(u => u.Messages)
                 .HasForeignKey(m => m.UserId);
-            
+
             base.OnModelCreating(builder);
         }
     }

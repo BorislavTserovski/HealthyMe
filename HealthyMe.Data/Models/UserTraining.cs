@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HealthyMe.Data.Models
+﻿namespace HealthyMe.Data.Models
 {
     public class UserTraining
     {

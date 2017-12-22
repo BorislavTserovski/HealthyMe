@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using HealthyMe.Services.Models;
+﻿using AutoMapper.QueryableExtensions;
 using HealthyMe.Data;
-using System.Linq;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
 using HealthyMe.Data.Models;
+using HealthyMe.Services.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HealthyMe.Services.Implementations
 {
@@ -25,7 +22,7 @@ namespace HealthyMe.Services.Implementations
             var user = this.db.Users.Where(u => u.Id == userId).FirstOrDefault();
             foreach (var product in this.db.Products)
             {
-                if (product.UserId==userId)
+                if (product.UserId == userId)
                 {
                     product.UserId = null;
                 }
@@ -48,7 +45,7 @@ namespace HealthyMe.Services.Implementations
                 UserId = userId
             };
 
-            if (message==null)
+            if (message == null)
             {
                 return;
             }

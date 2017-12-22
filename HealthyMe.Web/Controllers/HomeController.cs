@@ -1,13 +1,10 @@
-﻿using System;
+﻿using HealthyMe.Services.Admin;
+using HealthyMe.Services.Admin.Models;
+using HealthyMe.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using HealthyMe.Web.Models;
-using HealthyMe.Services.Admin;
-using HealthyMe.Web.Areas.Admin.Models.Products;
-using HealthyMe.Services.Admin.Models;
 
 namespace HealthyMe.Web.Controllers
 {
@@ -27,13 +24,10 @@ namespace HealthyMe.Web.Controllers
             {
                 return View(new List<ProductListingModel>());
             }
-            
             else
             {
                 return View(result);
             }
-            
-           
         }
 
         public IActionResult About()

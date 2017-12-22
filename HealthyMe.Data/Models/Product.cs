@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace HealthyMe.Data.Models
 {
@@ -17,7 +15,6 @@ namespace HealthyMe.Data.Models
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }
-
 
         [Range(0, 10000)]
         public int Energy { get; set; }

@@ -1,5 +1,3 @@
-using System;
-
 namespace HealthyMe.Web.Models
 {
     public class ErrorViewModel

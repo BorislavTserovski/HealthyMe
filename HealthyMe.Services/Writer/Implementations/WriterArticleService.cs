@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthyMe.Services.Writer.Implementations
@@ -64,7 +63,7 @@ namespace HealthyMe.Services.Writer.Implementations
         public async Task Delete(int id)
         {
             var article = this.db.Articles.FirstOrDefault(a => a.Id == id);
-            if (article==null)
+            if (article == null)
             {
                 return;
             }
@@ -79,7 +78,5 @@ namespace HealthyMe.Services.Writer.Implementations
       => await this.db.Articles.Where(a => a.Id == id)
             .ProjectTo<ArticleDeleteModel>()
             .FirstOrDefaultAsync();
-
-
     }
 }

@@ -1,9 +1,5 @@
-﻿using HealthyMe.Data;
-using HealthyMe.Data.Models;
+﻿using HealthyMe.Data.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace HealthyMe.Services.Implementations
 {

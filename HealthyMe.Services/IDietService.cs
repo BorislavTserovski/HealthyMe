@@ -1,8 +1,6 @@
 ﻿using HealthyMe.Services.Models;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HealthyMe.Services
 {

@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using HealthyMe.Data.Models;
+using HealthyMe.Web.Models.ManageViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using HealthyMe.Web.Models;
-using HealthyMe.Web.Models.ManageViewModels;
-
-using HealthyMe.Data.Models;
+using System;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace HealthyMe.Web.Controllers
 {
@@ -23,7 +19,7 @@ namespace HealthyMe.Web.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-       
+
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
 
@@ -32,13 +28,13 @@ namespace HealthyMe.Web.Controllers
         public ManageController(
           UserManager<User> userManager,
           SignInManager<User> signInManager,
-        
+
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-           
+
             _logger = logger;
             _urlEncoder = urlEncoder;
         }
@@ -503,6 +499,6 @@ namespace HealthyMe.Web.Controllers
                 unformattedKey);
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

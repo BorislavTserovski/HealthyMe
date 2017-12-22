@@ -1,25 +1,15 @@
 ﻿using FluentAssertions;
-using HealthyMe.Data.Models;
-using HealthyMe.Test.Mocks;
 using HealthyMe.Web;
 using HealthyMe.Web.Areas.Writer.Controllers;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Moq;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace HealthyMe.Test.Web.Controllers
 {
     public class ArticlesControllerTest
     {
-      
-
         [Fact]
         public void ArticlesControllerShouldBeInWriterArea()
         {
@@ -53,9 +43,5 @@ namespace HealthyMe.Test.Web.Controllers
             areaAttribute.Should().NotBeNull();
             areaAttribute.Roles.Should().Be(WebConstants.WriterRole);
         }
-
-       
-
-       
     }
 }

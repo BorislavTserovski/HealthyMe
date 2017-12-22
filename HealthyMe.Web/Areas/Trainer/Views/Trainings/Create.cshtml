@@ -1,5 +1,4 @@
-﻿
-@model HealthyMe.Web.Areas.Trainer.Models.TrainingFormModel
+﻿@model HealthyMe.Web.Areas.Trainer.Models.TrainingFormModel
 @{
     ViewData["Title"] = "Create";
 }
@@ -7,7 +6,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <form asp-action="Create" method="post" >
+        <form asp-action="Create" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label headerText"></label>
@@ -32,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsForGainingWeight" class="control-label headerText"></label>
-                <input asp-for="IsForGainingWeight" class="form-control"  />
+                <input asp-for="IsForGainingWeight" class="form-control" />
                 <span asp-validation-for="IsForGainingWeight" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -40,7 +39,7 @@
                 <select asp-for="MuscleGroup" asp-items="Html.GetEnumSelectList<MuscleGroup>()" class="form-control"></select>
                 <span asp-validation-for="MuscleGroup" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-success" />
                 <a asp-action="Index" class="btn btn-primary">Back to List</a>
@@ -52,6 +51,3 @@
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
-
-
-

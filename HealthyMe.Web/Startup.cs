@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using HealthyMe.Web.Models;
+﻿using AutoMapper;
 using HealthyMe.Data;
 using HealthyMe.Data.Models;
-using AutoMapper;
 using HealthyMe.Web.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace HealthyMe.Web
 {
     public class Startup
     {
-        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,7 +21,6 @@ namespace HealthyMe.Web
 
         public IConfiguration Configuration { get; }
 
-       
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<HealthyMeDbContext>(options =>
@@ -44,8 +37,6 @@ namespace HealthyMe.Web
              .AddEntityFrameworkStores<HealthyMeDbContext>()
              .AddDefaultTokenProviders();
 
-            
-
             services.AddAutoMapper();
 
             services.AddDomainServices();
@@ -53,12 +44,9 @@ namespace HealthyMe.Web
             services.AddMvc(options =>
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-                
             });
-            
         }
 
-       
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseDataBaseMigration();

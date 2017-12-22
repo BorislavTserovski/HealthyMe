@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using HealthyMe.Services.Models;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper.QueryableExtensions;
 using HealthyMe.Data;
 using HealthyMe.Data.Models;
+using HealthyMe.Services.Models;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using AutoMapper.QueryableExtensions;
 
 namespace HealthyMe.Services.Implementations
 {
@@ -17,10 +15,8 @@ namespace HealthyMe.Services.Implementations
 
         public DietService(HealthyMeDbContext db)
         {
-
             this.db = db;
         }
-
 
         public void Add(string name, string description, IFormFile file, string userId)
         {
@@ -39,10 +35,8 @@ namespace HealthyMe.Services.Implementations
             diet.Description = description;
             diet.AuthorId = userId;
 
-
             this.db.Diets.Add(diet);
             this.db.SaveChanges();
-
         }
 
         public DietFormModel GetById(int id)
@@ -50,7 +44,6 @@ namespace HealthyMe.Services.Implementations
             return this.db.Diets.Where(d => d.Id == id)
                  .ProjectTo<DietFormModel>()
                  .FirstOrDefault();
-            
         }
 
         public IEnumerable<DietListingModel> All(int page = 1, int pageSize = 5)
@@ -66,7 +59,7 @@ namespace HealthyMe.Services.Implementations
         {
             Diet diet = this.db.Diets.Find(id);
 
-            if (diet==null)
+            if (diet == null)
             {
                 return;
             }
@@ -83,13 +76,11 @@ namespace HealthyMe.Services.Implementations
                 Name = diet.Name,
                 Description = diet.Description,
                 Image = diet.Image,
-
             };
         }
 
         public void Edit(int id, string name, string description, IFormFile file)
         {
-          
             Diet diet = this.db.Diets.Find(id);
             using (MemoryStream ms = new MemoryStream())
             {
@@ -104,7 +95,6 @@ namespace HealthyMe.Services.Implementations
             diet.Name = name;
             diet.Description = description;
 
-           
             this.db.SaveChanges();
         }
 
@@ -113,7 +103,7 @@ namespace HealthyMe.Services.Implementations
         public bool isUserAuthor(string userId, int dietId)
         {
             var diet = this.db.Diets.FirstOrDefault(d => d.Id == dietId);
-            if (userId==null)
+            if (userId == null)
             {
                 return false;
             }

@@ -1,10 +1,7 @@
-﻿using HealthyMe.Common.Mapping;
+﻿using AutoMapper;
+using HealthyMe.Common.Mapping;
 using HealthyMe.Data.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
-using System.Linq;
 
 namespace HealthyMe.Services.Models
 {

@@ -9,7 +9,6 @@
             {
             <b class="headerText">Search for foods and drinks by: </b>@Html.RadioButton("SearchBy", "Name", true) <span class="headerText">Name</span>
 
-
                 @Html.RadioButton("SearchBy", "Category") <span class="headerText">Category</span><br />
                 @Html.TextBox("searchTerm", null, new { @class = "searchField" })
                 <input type="submit" class="btn btn-primary headerText" value="Search" />
@@ -45,7 +44,7 @@
                 <th class="headerText">
                    Category
                 </th>
-                
+
                 <th></th>
             </tr>
         </thead>
@@ -79,10 +78,9 @@
                     <td class="tdClass">
                         @Html.DisplayFor(modelItem => item.Category)
                     </td>
-                    
+
                     <td>
                         <a asp-action="AddToDay" asp-route-id="@item.Id"   class="btn btn-primary">Add</a>
-                       
                     </td>
                 </tr>
             }
@@ -103,4 +101,3 @@
         </li>
     </ul>
 }
-

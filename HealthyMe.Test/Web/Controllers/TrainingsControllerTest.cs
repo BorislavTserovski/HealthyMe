@@ -3,17 +3,13 @@ using HealthyMe.Web;
 using HealthyMe.Web.Areas.Trainer.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace HealthyMe.Test.Web.Controllers
 {
     public class TrainingsControllerTest
     {
-
         [Fact]
         public void TrainingsControllerShouldBeInTrainerArea()
         {

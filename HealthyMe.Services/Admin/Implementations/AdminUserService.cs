@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthyMe.Services.Admin.Implementations
@@ -29,11 +28,11 @@ namespace HealthyMe.Services.Admin.Implementations
         public async Task Delete(string id)
         {
             var user = this.db.Users.Where(u => u.Id == id).FirstOrDefault();
-            if (user==null)
+            if (user == null)
             {
                 return;
             }
-             this.db.Users.Remove(user);
+            this.db.Users.Remove(user);
 
             await this.db.SaveChangesAsync();
         }
@@ -50,43 +49,38 @@ namespace HealthyMe.Services.Admin.Implementations
                 {
                     user.AllowedCalories = 2500;
                 }
-
                 else if (BMI > 25)
                 {
                     user.AllowedCalories = 2100;
                 }
-
                 else if (BMI < 18.5)
                 {
                     user.AllowedCalories = 2800;
                 }
             }
-
             else if (user.Gender == Gender.female)
             {
                 if (BMI >= 18.5 && BMI <= 25)
                 {
                     user.AllowedCalories = 1900;
                 }
-
                 else if (BMI > 25)
                 {
                     user.AllowedCalories = 1700;
                 }
-
                 else if (BMI < 18.5)
                 {
                     user.AllowedCalories = 2100;
                 }
             }
 
-           await db.SaveChangesAsync();
+            await db.SaveChangesAsync();
 
             return user.AllowedCalories;
         }
 
         public User GetUserById(string id)
-        =>  this.db.Users.Where(u => u.Id == id)
+        => this.db.Users.Where(u => u.Id == id)
             .FirstOrDefault();
 
         public async Task SetUserDayToCurrent(string userId)

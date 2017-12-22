@@ -1,17 +1,15 @@
-﻿using HealthyMe.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using HealthyMe.Services.Admin.Models;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper.QueryableExtensions;
+using HealthyMe.Data;
 using HealthyMe.Data.Models;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using System.Linq;
+using HealthyMe.Services.Admin.Models;
 using HealthyMe.Web.Areas.Admin.Models.Products;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HealthyMe.Services.Admin.Implementations
 {
@@ -27,11 +25,20 @@ namespace HealthyMe.Services.Admin.Implementations
         public async Task AddToDay(int id, string userId)
         {
             Product product = this.db.Products.Where(p => p.Id == id).FirstOrDefault();
-            
+
+            if (product == null)
+            {
+                return;
+            }
             User user = this.db.Users.Where(u => u.Id == userId).FirstOrDefault();
+
+            if (user == null)
+            {
+                return;
+            }
             user.MyProducts.Add(product);
-            
-            if (!this.db.UsersWithProducts.Any(p=>p.ProductId==product.Id&&p.UserId==user.Id))
+
+            if (!this.db.UsersWithProducts.Any(p => p.ProductId == product.Id && p.UserId == user.Id))
             {
                 this.db.Add(new UserProduct
                 {
@@ -39,12 +46,10 @@ namespace HealthyMe.Services.Admin.Implementations
                     ProductId = product.Id
                 });
             }
-           
+
             user.AllowedCalories -= product.Energy;
 
             await this.db.SaveChangesAsync();
-
-
         }
 
         [AllowAnonymous]
@@ -123,7 +128,6 @@ namespace HealthyMe.Services.Admin.Implementations
 
                 return result;
             }
-
             else if (searchBy == "Category")
             {
                 if (string.IsNullOrEmpty(searchTerm))
@@ -143,6 +147,6 @@ namespace HealthyMe.Services.Admin.Implementations
         }
 
         public async Task<int> TotalAsync()
-        =>  await this.db.Products.CountAsync();
+        => await this.db.Products.CountAsync();
     }
 }

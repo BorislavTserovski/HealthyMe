@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using HealthyMe.Data.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using HealthyMe.Web.Infrastructure.Extensions;
+﻿using HealthyMe.Data.Models;
 using HealthyMe.Services.Admin;
 using HealthyMe.Web.Areas.Admin.Models.Users;
+using HealthyMe.Web.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HealthyMe.Web.Areas.Admin.Controllers
 {
@@ -75,12 +73,12 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(string id)
         {
-            if (id==null)
+            if (id == null)
             {
-               return NotFound();
+                return NotFound();
             }
             var user = await this.userManager.FindByIdAsync(id);
-            if (user==null)
+            if (user == null)
             {
                 return NotFound();
             }
@@ -88,12 +86,11 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult>Destroy(string id)
+        public async Task<IActionResult> Destroy(string id)
         {
             await this.users.Delete(id);
 
             return RedirectToAction(nameof(Index));
-
         }
     }
 }

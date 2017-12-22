@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using HealthyMe.Data.Models;
+using HealthyMe.Services;
+using HealthyMe.Web.Infrastructure.Extensions;
+using HealthyMe.Web.Models;
+using HealthyMe.Web.Models.AccountViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using HealthyMe.Web.Models;
-using HealthyMe.Web.Models.AccountViewModels;
-
-using HealthyMe.Data.Models;
-using HealthyMe.Services.Admin;
-using HealthyMe.Services;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using HealthyMe.Web.Infrastructure.Extensions;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace HealthyMe.Web.Controllers
 {
@@ -28,7 +22,7 @@ namespace HealthyMe.Web.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IUserService users;
-       
+
         private readonly ILogger _logger;
 
         public AccountController(
@@ -70,8 +64,6 @@ namespace HealthyMe.Web.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Name, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    
-                   
                     _logger.LogInformation("User logged in.");
 
                     return RedirectToLocal(returnUrl);
@@ -229,8 +221,17 @@ namespace HealthyMe.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Name, Email = model.Email, Name = model.Name
-                , Age = model.Age, Gender = model.Gender, Weight = model.Weight, Height = model.Height};
+                var user = new User
+                {
+                    UserName = model.Name,
+                    Email = model.Email,
+                    Name = model.Name
+                ,
+                    Age = model.Age,
+                    Gender = model.Gender,
+                    Weight = model.Weight,
+                    Height = model.Height
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -382,7 +383,7 @@ namespace HealthyMe.Web.Controllers
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 //var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
                 //await _emailSender.SendEmailAsync(model.Email, "Reset Password",
-                  // $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+                // $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
                 return RedirectToAction(nameof(ForgotPasswordConfirmation));
             }
 
@@ -440,17 +441,15 @@ namespace HealthyMe.Web.Controllers
             return View();
         }
 
-
         [HttpGet]
         public IActionResult AccessDenied()
         {
             return View();
         }
-        
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult>SendMessage(MessageFormModel messageModel)
+        public async Task<IActionResult> SendMessage(MessageFormModel messageModel)
         {
             if (!ModelState.IsValid)
             {
@@ -484,6 +483,6 @@ namespace HealthyMe.Web.Controllers
             }
         }
 
-        #endregion
+        #endregion Helpers
     }
 }

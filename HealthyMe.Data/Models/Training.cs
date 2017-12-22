@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace HealthyMe.Data.Models
 {
@@ -18,18 +16,15 @@ namespace HealthyMe.Data.Models
         [MinLength(2)]
         public string Description { get; set; }
 
-
-        [RegularExpression("^https(.)+", ErrorMessage ="The video url must start with \"https\"")]
+        [RegularExpression("^https(.)+", ErrorMessage = "The video url must start with \"https\"")]
         public string VideoUrl { get; set; }
 
         public bool IsForLoosingWeight { get; set; }
 
         public bool IsForGainingWeight { get; set; }
 
-        public MuscleGroup MuscleGroup  { get; set; }
+        public MuscleGroup MuscleGroup { get; set; }
 
         public List<UserTraining> Users { get; set; } = new List<UserTraining>();
-
-
     }
 }

@@ -34,10 +34,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                   
+
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                   
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -47,17 +46,11 @@
 
         <div id="wrapper" class="toggled">
             <div id="large-header" class="large-header">
-                
 
                     <div class="body-content">@RenderBody()</div>
-               
             </div>
-
         </div>
-
     </div>
-
-
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

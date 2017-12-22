@@ -1,12 +1,9 @@
 ﻿using HealthyMe.Data.Models;
-using HealthyMe.Data;
 using Microsoft.AspNetCore.Identity;
 using Moq;
 
 namespace HealthyMe.Test.Mocks
 {
-   
-
     public class UserManagerMock
     {
         public static Mock<UserManager<User>> New

@@ -1,5 +1,4 @@
-﻿
-@model ArticleListingViewModel
+﻿@model ArticleListingViewModel
 @{
     ViewData["Title"] = "Articles";
 }
@@ -8,7 +7,7 @@
 
 <div class="row">
     <div class="col-md-8">
-        
+
         <ul>
             @if (User.IsInRole(WebConstants.WriterRole))
             {
@@ -22,7 +21,7 @@
             <li class="list-group-item">
                 <div>
                     <a href="@article" data-toggle="collapse" class="btn btn-info"><span class="headerText">@Model.Articles.ElementAt(i).Title</span></a>
-                    
+
                     <small style="margin:5px">  published by @Model.Articles.ElementAt(i).Author on @Model.Articles.ElementAt(i).PublishDate.ToShortDateString()</small>
 
                     @if (User.IsInRole(WebConstants.WriterRole))
@@ -40,9 +39,7 @@
                     </div>
                     <div>
                         @Model.Articles.ElementAt(i).Content
-                        
                     </div>
-                    
                 </div>
             </li>
            }

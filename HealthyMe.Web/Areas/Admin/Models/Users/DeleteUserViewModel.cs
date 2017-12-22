@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HealthyMe.Web.Areas.Admin.Models.Users
+﻿namespace HealthyMe.Web.Areas.Admin.Models.Users
 {
     public class DeleteUserViewModel
     {

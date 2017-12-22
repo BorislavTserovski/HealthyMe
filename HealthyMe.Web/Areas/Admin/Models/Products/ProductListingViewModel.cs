@@ -2,8 +2,6 @@
 using HealthyMe.Services.Admin.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HealthyMe.Web.Areas.Admin.Models.Products
 {
@@ -23,7 +21,5 @@ namespace HealthyMe.Web.Areas.Admin.Models.Products
         public int PreviousPage => this.CurrentPage <= 1 ? 1 : this.CurrentPage - 1;
 
         public int TotalProducts { get; set; }
-
-       
     }
 }

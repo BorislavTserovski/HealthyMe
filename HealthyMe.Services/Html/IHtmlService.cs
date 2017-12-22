@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HealthyMe.Services.Html
+﻿namespace HealthyMe.Services.Html
 {
     public interface IHtmlService
     {
