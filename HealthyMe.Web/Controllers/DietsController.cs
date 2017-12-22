@@ -47,6 +47,11 @@ namespace HealthyMe.Web.Controllers
                 return View(dietModel);
             }
             string userId = userManager.GetUserId(User);
+            if (userId == null)
+            {
+                return NotFound();
+            }
+
             string sanitizedDescription = this.html.Sanitize(dietModel.Description);
             this.diets.Add(dietModel.Name, sanitizedDescription, file, userId);
 
@@ -59,6 +64,10 @@ namespace HealthyMe.Web.Controllers
         public IActionResult Edit(int id)
         {
             string userId = this.userManager.GetUserId(User);
+            if (userId == null)
+            {
+                return NotFound();
+            }
             if (!this.diets.isUserAuthor(userId, id) && !User.IsInRole(WebConstants.AdministratorRole))
             {
                 return Unauthorized();

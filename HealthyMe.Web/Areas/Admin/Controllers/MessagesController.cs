@@ -27,6 +27,11 @@ namespace HealthyMe.Web.Areas.Admin.Controllers
         {
             var message = await this.messages.GetById(id);
 
+            if (message == null)
+            {
+                return NotFound();
+            }
+
             return View(message);
         }
 

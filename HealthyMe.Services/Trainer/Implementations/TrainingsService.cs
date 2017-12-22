@@ -48,6 +48,11 @@ namespace HealthyMe.Services.Trainer.Implementations
                 .Where(t => t.Id == id)
                 .FirstOrDefault();
 
+            if (training == null)
+            {
+                return;
+            }
+
             this.db.Trainings.Remove(training);
 
             await this.db.SaveChangesAsync();

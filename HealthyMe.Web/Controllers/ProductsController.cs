@@ -39,13 +39,25 @@ namespace HealthyMe.Web.Controllers
             var user = this.adminUserService.GetUserById(userId);
             if (user.Day == null)
             {
+                var allowedCallories = await this.adminUserService.GetUserAllowedCalories(userId);
+                if (allowedCallories == -1)
+                {
+                    return NotFound();
+                }
+
+                user.AllowedCalories = allowedCallories;
                 await this.adminUserService.SetUserDayToCurrent(userId);
-                user.AllowedCalories = await this.adminUserService.GetUserAllowedCalories(userId);
             }
 
             if (user.Day != DateTime.Today)
             {
-                user.AllowedCalories = await this.adminUserService.GetUserAllowedCalories(userId);
+                var allowedCallories = await this.adminUserService.GetUserAllowedCalories(userId);
+                if (allowedCallories == -1)
+                {
+                    return NotFound();
+                }
+
+                user.AllowedCalories = allowedCallories;
                 await this.adminUserService.SetUserDayToCurrent(userId);
             }
             return View(new ProductListingViewModel
@@ -79,7 +91,18 @@ namespace HealthyMe.Web.Controllers
         public async Task<IActionResult> ViewMyProducts()
         {
             string userId = this.users.GetUserId(User);
+
+            if (userId == null)
+            {
+                return NotFound();
+            }
+
             var user = this.adminUserService.GetUserById(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
             var userWithProducts = await this.userService.MyProducts(userId);
             if (user.Day == null)
             {
@@ -100,7 +123,18 @@ namespace HealthyMe.Web.Controllers
         public async Task<IActionResult> ClearList()
         {
             string userId = this.users.GetUserId(User);
+            if (userId == null)
+            {
+                return NotFound();
+            }
+
             var user = this.adminUserService.GetUserById(userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
             user.AllowedCalories = await this.adminUserService.GetUserAllowedCalories(userId);
 
             await this.userService.ClearFoodAndDrinksList(userId);

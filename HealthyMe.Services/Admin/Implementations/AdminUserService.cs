@@ -40,6 +40,10 @@ namespace HealthyMe.Services.Admin.Implementations
         public async Task<int> GetUserAllowedCalories(string userId)
         {
             var user = this.db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            if (user == null)
+            {
+                return -1;
+            }
             var BMI = Math.Round(user.Weight / ((user.Height / 100) * (user.Height / 100)), 2);
             user.BodyMassIndex = BMI;
 
@@ -86,6 +90,11 @@ namespace HealthyMe.Services.Admin.Implementations
         public async Task SetUserDayToCurrent(string userId)
         {
             var user = this.db.Users.Where(u => u.Id == userId).FirstOrDefault();
+
+            if (user == null)
+            {
+                return;
+            }
 
             user.Day = DateTime.Today;
             await this.db.SaveChangesAsync();

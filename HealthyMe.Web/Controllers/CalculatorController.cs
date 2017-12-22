@@ -18,13 +18,11 @@ namespace HealthyMe.Web.Controllers
             return View();
         }
 
-        //GET
         public IActionResult Calculate()
         {
             return View();
         }
 
-        //POST
         [HttpPost]
         public IActionResult Calculate(CalculatorModel calculatorModel)
         {
