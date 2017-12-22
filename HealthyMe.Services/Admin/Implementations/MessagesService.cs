@@ -6,6 +6,7 @@ using HealthyMe.Services.Admin.Models;
 using HealthyMe.Data;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace HealthyMe.Services.Admin.Implementations
 {
@@ -22,6 +23,20 @@ namespace HealthyMe.Services.Admin.Implementations
             .Messages
             .ProjectTo<MessagesListingModel>()
             .ToListAsync();
+
+        public async Task Delete(int id)
+        {
+            var message = await this.db.Messages.FirstOrDefaultAsync();
+
+            this.db.Remove(message);
+
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task<MessagesListingModel> GetById(int id)
+       => await this.db.Messages.Where(m => m.Id == id)
+            .ProjectTo<MessagesListingModel>()
+            .FirstOrDefaultAsync();
 
     }
 }

@@ -84,7 +84,7 @@ body {
 
 .tdClass {
     font-family: 'Comic Sans MS';
-    color: #ffccff;
+    color: #000000;
 }
 
 .imageResize {
@@ -165,9 +165,9 @@ body {
         color:#404040;
     }
 
-.articleText{
-    font-style:italic;
-    color: wheat;
+.articleText {
+    font-style: italic;
+    color: #000000;
 }
 .numbersFont {
     color: #009999

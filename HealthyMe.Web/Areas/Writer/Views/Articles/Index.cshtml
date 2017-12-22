@@ -7,8 +7,14 @@
 <h2 class="headerText">@ViewData["Title"]</h2>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
+        
         <ul>
+            @if (User.IsInRole(WebConstants.WriterRole))
+            {
+                <a asp-area="Writer" asp-controller="Articles" asp-action="Create" class="btn btn-primary">Add New</a>
+
+            }
            @for (int i = 0; i < Model.Articles.Count(); i++)
            {
                string article = $"#article{i}";
@@ -22,6 +28,7 @@
                     @if (User.IsInRole(WebConstants.WriterRole))
                     {
                         <a asp-area="Writer" asp-controller="Articles" asp-action="Delete" asp-route-id="@Model.Articles.ElementAt(i).Id" class="btn btn-danger"><span class="headerText">Delete</span></a>
+
                     }
                 </div>
                 <div id="@id" class="collapse">

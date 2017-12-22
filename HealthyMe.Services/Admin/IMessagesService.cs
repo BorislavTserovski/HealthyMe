@@ -9,5 +9,9 @@ namespace HealthyMe.Services.Admin
     public interface IMessagesService
     {
         Task<IEnumerable<MessagesListingModel>> AllAsync();
+
+        Task Delete(int id);
+
+        Task <MessagesListingModel> GetById(int id);
     }
 }

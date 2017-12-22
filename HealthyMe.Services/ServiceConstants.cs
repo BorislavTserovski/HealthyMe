@@ -8,7 +8,7 @@ namespace HealthyMe.Services
     {
         public const int ArticlePageSize = 25;
 
-        public const int ProductsPageSize = 10;
+        public const int ProductsPageSize = 8;
 
         public const int TrainingsPageSize = 5;
     }

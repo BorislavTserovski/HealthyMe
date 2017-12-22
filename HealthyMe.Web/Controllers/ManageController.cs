@@ -59,7 +59,8 @@ namespace HealthyMe.Web.Controllers
             {
                 Username = user.UserName,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
+                Height = user.Height,
+                Weight = user.Weight,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
             };
@@ -92,14 +93,15 @@ namespace HealthyMe.Web.Controllers
                 }
             }
 
-            var phoneNumber = user.PhoneNumber;
-            if (model.PhoneNumber != phoneNumber)
+            var height = user.Height;
+            if (model.Height != height)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
-                }
+                model.Height = height;
+            }
+            var weight = user.Weight;
+            if (model.Weight != weight)
+            {
+                model.Weight = weight;
             }
 
             StatusMessage = "Your profile has been updated";

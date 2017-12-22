@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyMe.Common", "Healthy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyMe.Services", "HealthyMe.Services\HealthyMe.Services.csproj", "{7B660254-3395-4F88-B0FA-3D4E654F42FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyMe.Test", "HealthyMe.Test\HealthyMe.Test.csproj", "{92E5E64C-1B65-448D-A7B2-5E7F160E2D7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyMe.Test", "HealthyMe.Test\HealthyMe.Test.csproj", "{7B3ED736-030B-48F4-9ED5-FB3CBDEE4930}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{7B660254-3395-4F88-B0FA-3D4E654F42FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B660254-3395-4F88-B0FA-3D4E654F42FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B660254-3395-4F88-B0FA-3D4E654F42FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92E5E64C-1B65-448D-A7B2-5E7F160E2D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92E5E64C-1B65-448D-A7B2-5E7F160E2D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92E5E64C-1B65-448D-A7B2-5E7F160E2D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92E5E64C-1B65-448D-A7B2-5E7F160E2D7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B3ED736-030B-48F4-9ED5-FB3CBDEE4930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B3ED736-030B-48F4-9ED5-FB3CBDEE4930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B3ED736-030B-48F4-9ED5-FB3CBDEE4930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B3ED736-030B-48F4-9ED5-FB3CBDEE4930}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
